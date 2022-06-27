@@ -65,7 +65,7 @@ export const DisplayDynamicHeader = ({ storeType, theme }: Props) => {
 
   const datasource = {
     getRows(params: any) {
-      const { urls, numbers }: any = checkDomain()
+      const { urls, numbers }: any = checkDomain(0)
 
       console.log(process.env)
       console.log(`params:${params}`)
@@ -104,26 +104,14 @@ export const DisplayDynamicHeader = ({ storeType, theme }: Props) => {
   const addData = () => {
     count = count + 1
 
-    const { urls, numbers } = checkDomain()
+    const { urls, numbers, addData } = checkDomain(count)
     if (urls) {
       fetch(urls, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          id: count,
-          athlete: 'Vinod',
-          age: 38,
-          country: 'Kazakhstan',
-          year: 2012,
-          date: '12/08/2012',
-          sport: 'Cycling',
-          gold: 1,
-          silver: 0,
-          bronze: 0,
-          total: 1,
-        }),
+        body: JSON.stringify(addData),
       }).then((response) => {
         response.json()
         gridRef.current?.api.refreshServerSideStore({
