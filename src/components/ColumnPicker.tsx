@@ -1,17 +1,20 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { filterHeader } from '../utils/utils'
+import { filterHeader, checkDomain } from '../utils/utils'
 import Checkbox from '@mui/material/Checkbox'
 import FormControlLabel from '@mui/material/FormControlLabel'
 
 export const ColumnPicker = () => {
   const [lists, setLists] = useState<any[]>([])
+  const { urls } = checkDomain(0)
   useEffect(() => {
-    fetch('http://localhost:4000/olympic')
-      .then((res) => res.json())
-      .then((data) => {
-        const items = filterHeader(data)
-        setLists(items)
-      })
+    if (urls) {
+      fetch(urls)
+        .then((res) => res.json())
+        .then((data) => {
+          const items = filterHeader(data)
+          setLists(items)
+        })
+    }
   }, [])
   return (
     <div>
