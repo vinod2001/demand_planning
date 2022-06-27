@@ -32,6 +32,7 @@ import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
 import { TabComponent } from './components/Tabs'
 import { TableHeaderMenu } from './components/TableHeaderMenu'
+import { Groups } from './components/Groups'
 
 type Anchor = 'top' | 'left' | 'bottom' | 'right'
 
@@ -158,18 +159,27 @@ export const Layout3 = () => {
     <Box className={classes.root}>
       <Grid container spacing={2}>
         <Grid item xs={12} sm={12} md={6}>
-          <Paper className={classes.paper}>
-            <TableHeaderMenu />
+          {/* <Paper className={classes.paper}>
+            <TableHeaderMenu heading={'Table 1'} />
             <DisplayDynamicHeader storeType="partial" theme="ag-theme-alpine" />
+          </Paper> */}
+          <Paper className={clsx(classes.paper, 'paper')}>
+            <Groups tableHeader={'Table 1'} group={'group'}  filter={true} />
           </Paper>
         </Grid>
         <Grid item xs={12} sm={12} md={6}>
-          <TabComponent />
+          {/* <TabComponent /> */}
+          <Paper className={clsx(classes.paper, 'paper')}>
+            <Groups tableHeader={'Table 2'} group={'tab'}  filter={true} />
+          </Paper>
         </Grid>
         <Grid item xs={12} sm={12} md={12}>
-          <Paper className={classes.paper}>
-            <TableHeaderMenu />
+          {/* <Paper className={classes.paper}>
+            <TableHeaderMenu heading={'Table 3'} />
             <DisplayDynamicHeader storeType="partial" theme="ag-theme-alpine" />
+          </Paper> */}
+          <Paper className={clsx(classes.paper, 'paper')}>
+            <Groups tableHeader={'Table 3'} group={'tab'}  filter={true} />
           </Paper>
         </Grid>
       </Grid>

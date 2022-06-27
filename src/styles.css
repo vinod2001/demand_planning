@@ -36,3 +36,9 @@ html {
   width: 31px;
   height: 38px;
 }
+.paper {
+  height: 655px;
+  position: relative;
+  overflow: hidden;
+  padding-bottom:10px;
+}

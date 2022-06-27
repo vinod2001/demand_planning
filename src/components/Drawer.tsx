@@ -63,7 +63,10 @@ const useStyles = makeStyles((theme) => ({
     padding: '15px',
   },
 }))
-export const DrawerLayout = () => {
+type Props = {
+  menuType?: string
+}
+export const DrawerLayout = ({ menuType }: Props) => {
   const [dropFiles, setDropFiles] = useState()
   const classes = useStyles()
   const maxLength = 20
@@ -114,46 +117,50 @@ export const DrawerLayout = () => {
         </Paper>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={12} md={12}>
-            <Paper>
-              <div className={clsx('fileUploader', classes.mar)}>
-                <h4>Upload Files</h4>
-                <FontAwesomeIcon
-                  icon={faFileExcel}
-                  style={{
-                    color: 'green',
-                    fontSize: '20px',
-                    paddingRight: '10px',
-                  }}
-                />
-                <div {...getRootProps({ className: classes.dropzone })}>
-                  <input {...getInputProps()} />
-                  <p className="dropboxTitle">
-                    Drag File Here <br />
-                    or <span>Browse</span>
-                  </p>
-                </div>
-              </div>
-            </Paper>
-            <Paper
-              className={clsx(classes.mar, classes.pad)}
-              style={{ display: 'flex' }}
-            >
-              <FontAwesomeIcon
-                icon={faFileExcel}
-                style={{
-                  color: 'green',
-                  fontSize: '40px',
-                  paddingRight: '10px',
-                }}
-              />
-              <Button
-                variant="contained"
-                size="medium"
-                style={{ width: '100%' }}
-              >
-                Download File
-              </Button>
-            </Paper>
+            {menuType !== 'main' && (
+              <>
+                <Paper>
+                  <div className={clsx('fileUploader', classes.mar)}>
+                    <h4>Upload Files</h4>
+                    <FontAwesomeIcon
+                      icon={faFileExcel}
+                      style={{
+                        color: 'green',
+                        fontSize: '20px',
+                        paddingRight: '10px',
+                      }}
+                    />
+                    <div {...getRootProps({ className: classes.dropzone })}>
+                      <input {...getInputProps()} />
+                      <p className="dropboxTitle">
+                        Drag File Here <br />
+                        or <span>Browse</span>
+                      </p>
+                    </div>
+                  </div>
+                </Paper>
+                <Paper
+                  className={clsx(classes.mar, classes.pad)}
+                  style={{ display: 'flex' }}
+                >
+                  <FontAwesomeIcon
+                    icon={faFileExcel}
+                    style={{
+                      color: 'green',
+                      fontSize: '40px',
+                      paddingRight: '10px',
+                    }}
+                  />
+                  <Button
+                    variant="contained"
+                    size="medium"
+                    style={{ width: '100%' }}
+                  >
+                    Download File
+                  </Button>
+                </Paper>
+              </>
+            )}
             <Paper className={clsx(classes.mar, classes.pad)}>
               <ColumnPicker />
             </Paper>

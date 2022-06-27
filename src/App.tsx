@@ -7,6 +7,7 @@ import Box from '@mui/material/Box'
 import AppBar from '@mui/material/AppBar'
 import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
+import { MainHeaderMenu } from './components/MainHeaderMenu'
 
 export default function App() {
   const [value, setValue] = React.useState(0)
@@ -16,21 +17,29 @@ export default function App() {
   return (
     <>
       <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
-        <AppBar position="static" style={{ background: '#333' }}>
+        <AppBar
+          position="static"
+          style={{
+            background: '#47617e', //#47617e
+            display: 'flex',
+            color: 'white',
+          }}
+        >
           <Tabs
             value={value}
             onChange={handleChange}
-            indicatorColor="secondary"
+            indicatorColor="primary"
             textColor="inherit"
             variant="fullWidth"
             aria-label="full width tabs example"
           >
-            <Tab label="Layout 1" />
-            <Tab label="Layout 2" />
+            <Tab label="Layout 1" sx={{ borderRight: '1px solid #5b7fa6' }} />
+            <Tab label="Layout 2" sx={{ borderRight: '1px solid #5b7fa6' }} />
             <Tab label="Layout 3" />
           </Tabs>
         </AppBar>
-        {/* <Layout1 /> */}
+
+        <MainHeaderMenu />
         {value === 0 && <Layout1 />}
         {value === 1 && <Layout2 />}
         {value === 2 && <Layout3 />}

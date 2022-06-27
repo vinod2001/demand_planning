@@ -16,6 +16,8 @@ import {
 } from 'ag-grid-community'
 import { filterHeader } from '../utils/utils'
 import Button from '@mui/material/Button'
+import Box from '@mui/material/Box'
+import { camelCase } from 'lodash'
 
 type Props = {
   storeType: 'partial' | 'full',
@@ -33,8 +35,11 @@ export const DisplayDynamicHeader = ({ storeType, theme }: Props) => {
       floatingFilter: true,
     }
   }, [])
-  const containerStyle = useMemo(() => ({ width: '100%', height: 'auto' }), [])
-  const gridStyle = useMemo(() => ({ height: '500px', width: '100%' }), [])
+  const containerStyle = useMemo(() => ({ width: '100%', height: '100%' }), [])
+  const gridStyle = useMemo(
+    () => ({ height: 'calc(100% - 110px)', width: '100%' }),
+    [],
+  )
   const gridRef = useRef<AgGridReact>(null)
 
   const addRow = (index: number | undefined) => {
@@ -60,32 +65,47 @@ export const DisplayDynamicHeader = ({ storeType, theme }: Props) => {
 
   const datasource = {
     getRows(params: any) {
+      let urls: string | undefined = ''
+      let numbers = 0
+      if (process.env.NODE_ENV === 'development') {
+        urls = process.env.REACT_APP_DEV_URL
+        numbers = 8618
+      } else if (process.env.NODE_ENV === 'production') {
+        urls = process.env.REACT_APP_PRODUCTION_URL
+        numbers = 500
+      } else {
+        urls = process.env.REACT_APP_DEV_URL
+      }
+      console.log(process.env)
       console.log(`params:${params}`)
       const { startRow, endRow, filterModel, sortModel } = params.request
-      let url = `http://localhost:4000/olympic?`
-      // Sorting
-      if (sortModel.length) {
-        const { colId, sort } = sortModel[0]
-        url += `_sort=${colId}&_order=${sort}&`
-      }
-      //Pagination
-      url += `_start=${startRow}&_end=${endRow}&`
 
-      //Filtering
-      const filterKeys = Object.keys(filterModel)
-      filterKeys.forEach((filter) => {
-        url += `${filter}=${filterModel[filter].filter}&`
-      })
-      fetch(url)
-        .then((httpResponse) => httpResponse.json())
-        .then((response) => {
-          params.successCallback(response, 8618)
-          params.api.setColumnDefs(filterHeader(response))
+      if (urls) {
+        let url = urls
+        // Sorting
+        if (sortModel.length) {
+          const { colId, sort } = sortModel[0]
+          url += `_sort=${colId}&_order=${sort}&`
+        }
+        //Pagination
+        url += `_start=${startRow}&_end=${endRow}&`
+
+        //Filtering
+        const filterKeys = Object.keys(filterModel)
+        filterKeys.forEach((filter) => {
+          url += `${filter}=${filterModel[filter].filter}&`
         })
-        .catch((error) => {
-          console.error(error)
-          params.failCallback()
-        })
+        fetch(url)
+          .then((httpResponse) => httpResponse.json())
+          .then((response) => {
+            params.successCallback(response, numbers)
+            params.api.setColumnDefs(filterHeader(response))
+          })
+          .catch((error) => {
+            console.error(error)
+            params.failCallback()
+          })
+      }
     },
   }
 
@@ -176,14 +196,34 @@ export const DisplayDynamicHeader = ({ storeType, theme }: Props) => {
           onGridReady={onGridReady}
         />
       </div>
-      <div style={{ marginTop: '10px' }}>
+      <Box
+        sx={{
+          width: 'auto',
+        }}
+        display="flex"
+        justifyContent="space-between"
+        style={{ marginTop: '10px' }}
+      >
         {/* <button type="button" className="" onClick={() => addRow(0)}>
           Add Row
         </button> */}
-        <Button variant="contained" onClick={() => addData()}>
-          Add Row
-        </Button>
-      </div>
+        <Box display="flex">
+          <Button
+            variant="contained"
+            onClick={() => addData()}
+            style={{ marginRight: '10px' }}
+          >
+            Add Row
+          </Button>
+          <Button variant="contained">Publish</Button>
+        </Box>
+        <Box display="flex" justifyContent={'flex-end'}>
+          <Button variant="contained" style={{ marginRight: '10px' }}>
+            Save
+          </Button>
+          <Button variant="contained">Cancel</Button>
+        </Box>
+      </Box>
     </div>
   )
 }

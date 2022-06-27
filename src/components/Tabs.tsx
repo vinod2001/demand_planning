@@ -9,6 +9,7 @@ import { DisplayDynamicHeader } from '../agGrid/AgGridDynamic'
 import { TableHeaderMenu } from './TableHeaderMenu'
 import Drawer from '@mui/material/Drawer'
 import { DrawerLayout } from './Drawer'
+import { Groups } from './Groups'
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -53,7 +54,11 @@ const useStyles = makeStyles((theme) => ({
     padding: '15px',
   },
 }))
-export const TabComponent = () => {
+
+type Props = {
+  filter: boolean
+}
+export const TabComponent = ({ filter }: Props) => {
   const classes = useStyles()
   const [value, setValue] = React.useState(0)
 
@@ -62,7 +67,7 @@ export const TabComponent = () => {
   }
 
   return (
-    <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
+    <Box sx={{ width: '100%', bgcolor: 'background.paper', height: '100%' }}>
       <Tabs
         value={value}
         onChange={handleChange}
@@ -77,26 +82,51 @@ export const TabComponent = () => {
         <Tab label="Item Five" />
         <Tab label="Item Six" />
         <Tab label="Item Seven" />
+        <Tab label="Item Eight" />
       </Tabs>
       {value === 0 && (
-        <Paper
-          className={classes.paper}
-          style={{
-            height: '533px',
-            border: '0px solid',
-            overflowY: 'scroll',
-          }}
-        >
-          <Grid container>
-            <Grid item xs={12} sm={12} md={12}>
-              <TableHeaderMenu />
-              <DisplayDynamicHeader
-                storeType="partial"
-                theme="ag-theme-alpine"
-              />
-            </Grid>
-          </Grid>
-        </Paper>
+        // <Paper
+        //   className={classes.paper}
+        //   style={{
+        //     height: '533px',
+        //     border: '0px solid',
+        //     overflowY: 'scroll',
+        //   }}
+        // >
+        // <Grid container>
+        //   <Grid item xs={12} sm={12} md={12}>
+        //     <TableHeaderMenu heading={'Table 2'} />
+        //     <DisplayDynamicHeader storeType="partial" theme="ag-theme-alpine" />
+        //     {/* <Groups tableHeader={'Table 2'} /> */}
+        //   </Grid>
+        // </Grid>
+        <Box style={{ height: '100%', overflowY: 'scroll' }}>
+          <TableHeaderMenu heading={'Table 2'} filter={filter} />
+          <DisplayDynamicHeader storeType="partial" theme="ag-theme-alpine" />
+        </Box>
+        // </Paper>
+      )}
+      {value === 1 && (
+        // <Paper
+        //   className={classes.paper}
+        //   style={{
+        //     height: '533px',
+        //     border: '0px solid',
+        //     overflowY: 'scroll',
+        //   }}
+        // >
+        // <Grid container>
+        //   <Grid item xs={12} sm={12} md={12}>
+        //     <TableHeaderMenu heading={'Table 3'} />
+        //     <DisplayDynamicHeader storeType="partial" theme="ag-theme-alpine" />
+        //   </Grid>
+        // </Grid>
+        // </Paper>
+
+        <Box style={{ height: '100%', overflowY: 'scroll' }}>
+          <TableHeaderMenu heading={'Table 3'} filter={filter} />
+          <DisplayDynamicHeader storeType="partial" theme="ag-theme-alpine" />
+        </Box>
       )}
     </Box>
   )

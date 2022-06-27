@@ -81,7 +81,11 @@ const menuLists = [
   { name: 'toString()', icon: faLinesLeaning },
   { name: 'Show Blueprint', icon: faShoePrints },
 ]
-export const TableHeaderMenu = () => {
+type Props = {
+  heading: string,
+  filter?:boolean
+}
+export const TableHeaderMenu = ({ heading, filter }: Props) => {
   const classes = useStyles()
   const [state, setState] = React.useState({
     top: false,
@@ -111,7 +115,7 @@ export const TableHeaderMenu = () => {
         width: 'auto',
       }}
       display="flex"
-      justifyContent="flex-end"
+      justifyContent="space-between"
       style={{
         background: '#eeeeee',
         borderRadius: '2px',
@@ -119,52 +123,64 @@ export const TableHeaderMenu = () => {
         marginBottom: '5px',
       }}
     >
-      <FontAwesomeIcon
-        icon={faCaretSquareDown}
-        style={{
-          color: 'black',
-          fontSize: '20px',
-          paddingRight: '10px',
-          cursor: 'pointer',
-        }}
-        aria-controls="simple-menu"
-        aria-haspopup="true"
-        onClick={handleClick}
-      />
-      <FontAwesomeIcon
-        icon={faFilter}
-        style={{
-          color: 'black',
-          fontSize: '20px',
-          paddingRight: '10px',
-          cursor: 'pointer',
-        }}
-        onClick={toggleDrawer('right', true)}
-      />
-      <Menu
-        id="simple-menu"
-        anchorEl={menu.anchorEl}
-        keepMounted
-        open={Boolean(menu.anchorEl)}
-        onClose={handleClose}
-        MenuListProps={{
-          'aria-labelledby': 'basic-button',
-        }}
+      <Box
+        display="flex"
+        style={{ border: '0px solid', fontWeight: 'bold', color: '#333' }}
       >
-        {menuLists.map((items) => (
-          <MenuItem style={{ padding: 0, margin: 0 }}>
-            <div style={{ display: 'flex' }}>
-              <div className={clsx(classes.subMenuBorder)}>
-                <FontAwesomeIcon
-                  icon={items.icon}
-                  className={clsx(classes.pad, classes.menuIconsize)}
-                />
+        {heading}
+      </Box>
+      {filter && <Box
+        display="flex"
+        justifyContent="flex-end"
+        style={{ border: '0px solid' }}
+      >
+        <FontAwesomeIcon
+          icon={faCaretSquareDown}
+          style={{
+            color: 'black',
+            fontSize: '20px',
+            paddingRight: '10px',
+            cursor: 'pointer',
+          }}
+          aria-controls="simple-menu"
+          aria-haspopup="true"
+          onClick={handleClick}
+        />
+        <FontAwesomeIcon
+          icon={faFilter}
+          style={{
+            color: 'black',
+            fontSize: '20px',
+            paddingRight: '10px',
+            cursor: 'pointer',
+          }}
+          onClick={toggleDrawer('right', true)}
+        />
+        <Menu
+          id="simple-menu"
+          anchorEl={menu.anchorEl}
+          keepMounted
+          open={Boolean(menu.anchorEl)}
+          onClose={handleClose}
+          MenuListProps={{
+            'aria-labelledby': 'basic-button',
+          }}
+        >
+          {menuLists.map((items) => (
+            <MenuItem style={{ padding: 0, margin: 0 }}>
+              <div style={{ display: 'flex' }}>
+                <div className={clsx(classes.subMenuBorder)}>
+                  <FontAwesomeIcon
+                    icon={items.icon}
+                    className={clsx(classes.pad, classes.menuIconsize)}
+                  />
+                </div>
+                <div className={clsx(classes.pad)}>{items.name}</div>
               </div>
-              <div className={clsx(classes.pad)}>{items.name}</div>
-            </div>
-          </MenuItem>
-        ))}
-      </Menu>
+            </MenuItem>
+          ))}
+        </Menu>
+      </Box>}
       <Drawer
         anchor={'right'}
         open={state['right']}

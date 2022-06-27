@@ -31,6 +31,8 @@ import { DrawerLayout } from './components/Drawer'
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
 import { TabComponent } from './components/Tabs'
+import { TableHeaderMenu } from './components/TableHeaderMenu'
+import { Groups } from './components/Groups'
 
 type Anchor = 'top' | 'left' | 'bottom' | 'right'
 
@@ -157,101 +159,25 @@ export const Layout2 = () => {
     <Box className={classes.root}>
       <Grid container spacing={2}>
         <Grid item xs={12} sm={12} md={12}>
-          <Paper className={classes.paper}>
-            <Box
-              sx={{
-                width: 'auto',
-              }}
-              display="flex"
-              justifyContent="flex-end"
-              style={{
-                background: '#eeeeee',
-                borderRadius: '2px',
-                padding: '5px',
-                marginBottom: '5px',
-              }}
-            >
-              <FontAwesomeIcon
-                icon={faCaretSquareDown}
-                style={{
-                  color: 'black',
-                  fontSize: '20px',
-                  paddingRight: '10px',
-                  cursor: 'pointer',
-                }}
-                aria-controls="simple-menu"
-                aria-haspopup="true"
-                onClick={handleClick}
-              />
-              <FontAwesomeIcon
-                icon={faFilter}
-                style={{
-                  color: 'black',
-                  fontSize: '20px',
-                  paddingRight: '10px',
-                  cursor: 'pointer',
-                }}
-                onClick={toggleDrawer('right', true)}
-              />
-              <Menu
-                id="simple-menu"
-                anchorEl={menu.anchorEl}
-                keepMounted
-                open={Boolean(menu.anchorEl)}
-                onClose={handleClose}
-                MenuListProps={{
-                  'aria-labelledby': 'basic-button',
-                }}
-              >
-                {menuLists.map((items) => (
-                  <MenuItem style={{ padding: 0, margin: 0 }}>
-                    <div style={{ display: 'flex' }}>
-                      <div className={clsx(classes.subMenuBorder)}>
-                        <FontAwesomeIcon
-                          icon={items.icon}
-                          className={clsx(classes.pad, classes.menuIconsize)}
-                        />
-                      </div>
-                      <div className={clsx(classes.pad)}>{items.name}</div>
-                    </div>
-                  </MenuItem>
-                ))}
-
-                {/* <MenuItem>Open In Excel</MenuItem>
-                <MenuItem style={{ padding: 0, margin: 0 }}>
-                  <div style={{ display: 'flex' }}>
-                    <div className={clsx(classes.subMenuBorder)}>
-                      <FontAwesomeIcon
-                        icon={faFilePdf}
-                        className={clsx(classes.pad)}
-                      />
-                    </div>
-                    <div className={clsx(classes.pad)}>Export to PDF</div>
-                  </div>
-                </MenuItem>
-                <MenuItem>Show API URL</MenuItem>
-                <MenuItem>Update Data</MenuItem>
-                <MenuItem>Show Full Data Path</MenuItem>
-                <MenuItem>Open in /data(CTRL+ALT+/)</MenuItem>
-                <MenuItem>toString()</MenuItem>
-                <MenuItem>Show Blueprint</MenuItem> */}
-              </Menu>
-            </Box>
-            <DisplayDynamicHeader storeType="partial" theme="ag-theme-alpine" />
+          <Paper className={clsx(classes.paper, 'paper')}>
+            <Groups tableHeader={'Table 1'} group={'group'} filter={true} />
           </Paper>
         </Grid>
         <Grid item xs={12} sm={12} md={12}>
-          <TabComponent />
+          {/* <TabComponent /> */}
+          <Paper className={clsx(classes.paper, 'paper')}>
+            <Groups tableHeader={'Table 2'} group={'tab'} filter={true} />
+          </Paper>
         </Grid>
       </Grid>
 
-      <Drawer
+      {/* <Drawer
         anchor={'right'}
         open={state['right']}
         onClose={toggleDrawer('right', false)}
       >
         <DrawerLayout />
-      </Drawer>
+      </Drawer> */}
     </Box>
   )
 }
