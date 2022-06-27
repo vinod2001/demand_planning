@@ -14,7 +14,7 @@ import {
   IServerSideGetRowsRequest,
   ServerSideStoreType,
 } from 'ag-grid-community'
-import { filterHeader } from '../utils/utils'
+import { checkDomain, filterHeader } from '../utils/utils'
 import Button from '@mui/material/Button'
 import Box from '@mui/material/Box'
 import { camelCase } from 'lodash'
@@ -65,17 +65,8 @@ export const DisplayDynamicHeader = ({ storeType, theme }: Props) => {
 
   const datasource = {
     getRows(params: any) {
-      let urls: string | undefined = ''
-      let numbers = 0
-      if (process.env.NODE_ENV === 'development') {
-        urls = process.env.REACT_APP_DEV_URL
-        numbers = 8618
-      } else if (process.env.NODE_ENV === 'production') {
-        urls = process.env.REACT_APP_PRODUCTION_URL
-        numbers = 500
-      } else {
-        urls = process.env.REACT_APP_DEV_URL
-      }
+      const { urls, numbers }: any = checkDomain()
+
       console.log(process.env)
       console.log(`params:${params}`)
       const { startRow, endRow, filterModel, sortModel } = params.request
@@ -109,62 +100,37 @@ export const DisplayDynamicHeader = ({ storeType, theme }: Props) => {
     },
   }
 
-  // const datasource = {
-  //   getRows(params) {
-  //     console.log(JSON.stringify(params.request, null, 1));
-  //     const { startRow, endRow, filterModel, sortModel } = params.request
-  //     let url = `http://localhost:4000/olympic?`
-  //     //Sorting
-  //     if (sortModel.length) {
-  //       const { colId, sort } = sortModel[0]
-  //       url += `_sort=${colId}&_order=${sort}&`
-  //     }
-  //     //Filtering
-  //     const filterKeys = Object.keys(filterModel)
-  //     filterKeys.forEach(filter => {
-  //       url += `${filter}=${filterModel[filter].filter}&`
-  //     })
-  //     //Pagination
-  //     url += `_start=${startRow}&_end=${endRow}`
-  //     fetch(url)
-  //       .then(httpResponse => httpResponse.json())
-  //       .then(response => {
-  //         params.successCallback(response, 499);
-  //       })
-  //       .catch(error => {
-  //         console.error(error);
-  //         params.failCallback();
-  //       })
-  //   }
-  // };
   let count = 0
   const addData = () => {
     count = count + 1
 
-    fetch('http://localhost:4000/olympic', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        id: count,
-        athlete: 'Vinod',
-        age: 38,
-        country: 'Kazakhstan',
-        year: 2012,
-        date: '12/08/2012',
-        sport: 'Cycling',
-        gold: 1,
-        silver: 0,
-        bronze: 0,
-        total: 1,
-      }),
-    }).then((response) => {
-      response.json()
-      gridRef.current?.api.refreshServerSideStore({
-        purge: true,
+    const { urls, numbers } = checkDomain()
+    if (urls) {
+      fetch(urls, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          id: count,
+          athlete: 'Vinod',
+          age: 38,
+          country: 'Kazakhstan',
+          year: 2012,
+          date: '12/08/2012',
+          sport: 'Cycling',
+          gold: 1,
+          silver: 0,
+          bronze: 0,
+          total: 1,
+        }),
+      }).then((response) => {
+        response.json()
+        gridRef.current?.api.refreshServerSideStore({
+          purge: true,
+        })
       })
-    })
+    }
   }
 
   const onGridReady = (params: GridReadyEvent) => {
