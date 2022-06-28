@@ -1,12 +1,7 @@
 import React, { useState, KeyboardEvent, MouseEvent } from 'react'
 import Box from '@mui/material/Box'
-// import Grid from '@mui/material/Grid'
 import { makeStyles } from '@material-ui/core/styles'
-import Paper from '@material-ui/core/Paper'
-import Grid from '@material-ui/core/Grid'
 import clsx from 'clsx'
-import { useDropzone } from 'react-dropzone'
-import Button from '@mui/material/Button'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faFileExcel,
@@ -83,9 +78,11 @@ const menuLists = [
 ]
 type Props = {
   heading: string,
-  filter?:boolean
+  filter?:boolean,
+  slicers?:boolean,
+  sideSlicers?:boolean
 }
-export const TableHeaderMenu = ({ heading, filter }: Props) => {
+export const TableHeaderMenu = ({ heading, filter, slicers, sideSlicers }: Props) => {
   const classes = useStyles()
   const [state, setState] = React.useState({
     top: false,
@@ -186,7 +183,7 @@ export const TableHeaderMenu = ({ heading, filter }: Props) => {
         open={state['right']}
         onClose={toggleDrawer('right', false)}
       >
-        <DrawerLayout />
+        <DrawerLayout slicers={slicers} sideSlicers={sideSlicers}/>
       </Drawer>
     </Box>
   )

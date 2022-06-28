@@ -64,9 +64,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 type Props = {
-  menuType?: string
+  menuType?: string,
+  slicers?: boolean,
+  sideSlicers?:boolean
 }
-export const DrawerLayout = ({ menuType }: Props) => {
+export const DrawerLayout = ({ menuType, slicers, sideSlicers }: Props) => {
   const [dropFiles, setDropFiles] = useState()
   const classes = useStyles()
   const maxLength = 20
@@ -109,12 +111,16 @@ export const DrawerLayout = ({ menuType }: Props) => {
   return (
     <Grid container className={classes.root}>
       <Grid item xs={12} sm={12} md={12}>
-        <Paper className={classes.pad}>
-          <AutocompleteComponent />
-        </Paper>
-        <Paper className={clsx(classes.pad, classes.mar)}>
-          <AutocompleteComponent />
-        </Paper>
+        {sideSlicers && (
+          <>
+            <Paper className={classes.pad}>
+              <AutocompleteComponent />
+            </Paper>
+            <Paper className={clsx(classes.pad, classes.mar)}>
+              <AutocompleteComponent />
+            </Paper>
+          </>
+        )}
         <Grid container spacing={2}>
           <Grid item xs={12} sm={12} md={12}>
             {menuType !== 'main' && (

@@ -25,13 +25,6 @@ import {
   faLinesLeaning,
   faShoePrints,
 } from '@fortawesome/free-solid-svg-icons'
-import { ColumnPicker } from './components/ColumnPicker'
-import Drawer from '@mui/material/Drawer'
-import { DrawerLayout } from './components/Drawer'
-import Menu from '@material-ui/core/Menu'
-import MenuItem from '@material-ui/core/MenuItem'
-import { TabComponent } from './components/Tabs'
-import { TableHeaderMenu } from './components/TableHeaderMenu'
 import { Groups } from './components/Groups'
 
 type Anchor = 'top' | 'left' | 'bottom' | 'right'
@@ -160,24 +153,17 @@ export const Layout2 = () => {
       <Grid container spacing={2}>
         <Grid item xs={12} sm={12} md={12}>
           <Paper className={clsx(classes.paper, 'paper')}>
-            <Groups tableHeader={'Table 1'} group={'group'} filter={true} />
+            <Groups tableHeader={'Table 1'} group={'group'} filter={true}  slicers={false} sideSlicers={true}/>
           </Paper>
         </Grid>
         <Grid item xs={12} sm={12} md={12}>
           {/* <TabComponent /> */}
           <Paper className={clsx(classes.paper, 'paper')}>
-            <Groups tableHeader={'Table 2'} group={'tab'} filter={true} />
+            <Groups tableHeader={'Table 2'} group={'tab'} filter={true}  slicers={false} sideSlicers={true}/>
           </Paper>
         </Grid>
       </Grid>
 
-      {/* <Drawer
-        anchor={'right'}
-        open={state['right']}
-        onClose={toggleDrawer('right', false)}
-      >
-        <DrawerLayout />
-      </Drawer> */}
     </Box>
   )
 }

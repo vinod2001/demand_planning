@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { Layout1 } from './Layout1'
 import { Layout2 } from './Layout2'
 import { Layout3 } from './Layout3'
+import { Layout4 } from './Layout4'
 import Box from '@mui/material/Box'
 import AppBar from '@mui/material/AppBar'
 import Tabs from '@mui/material/Tabs'
@@ -35,7 +36,8 @@ export default function App() {
           >
             <Tab label="Layout 1" sx={{ borderRight: '1px solid #5b7fa6' }} />
             <Tab label="Layout 2" sx={{ borderRight: '1px solid #5b7fa6' }} />
-            <Tab label="Layout 3" />
+            <Tab label="Layout 3" sx={{ borderRight: '1px solid #5b7fa6' }} />
+            <Tab label="Layout 4" />
           </Tabs>
         </AppBar>
 
@@ -43,6 +45,7 @@ export default function App() {
         {value === 0 && <Layout1 />}
         {value === 1 && <Layout2 />}
         {value === 2 && <Layout3 />}
+        {value === 3 && <Layout4 />}
       </Box>
     </>
   )

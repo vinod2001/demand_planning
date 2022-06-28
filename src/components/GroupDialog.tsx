@@ -16,18 +16,15 @@ import { DisplayDynamicHeader } from '../agGrid/AgGridDynamic'
 import { TableHeaderMenu } from './TableHeaderMenu'
 import { TabComponent } from './Tabs'
 import { makeStyles } from '@material-ui/core/styles'
-import Fade from '@mui/material/Fade'
-
-// type DialogTitleProps = {
-//   children?: React.ReactNode,
-//   onClose: (arg: boolean) => void
-// }
+import { SlicersGroup } from './SlicersGroup'
 
 type Props = {
-  setIsDialogOpen: (arg: boolean) => void,
-  heading: string,
-  filter: boolean,
-  group: string
+  setIsDialogOpen: (arg: boolean) => void;
+  heading: string;
+  filter: boolean;
+  group: string;
+  slicers?: boolean;
+  sideSlicers?: boolean;
 }
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -82,6 +79,8 @@ export const GroupDialog = ({
   filter,
   setIsDialogOpen,
   group,
+  slicers,
+  sideSlicers,
 }: Props) => {
   const classes = useStyles()
   return (
@@ -111,7 +110,13 @@ export const GroupDialog = ({
         <DialogContent dividers>
           {group === 'group' && (
             <Box style={{ height: '100%' }}>
-              <TableHeaderMenu heading={heading} filter={filter} />
+              {slicers && <SlicersGroup />}
+              <TableHeaderMenu
+                heading={heading}
+                filter={filter}
+                slicers={slicers}
+                sideSlicers={sideSlicers}
+              />
               <DisplayDynamicHeader
                 storeType="partial"
                 theme="ag-theme-alpine"
@@ -120,7 +125,11 @@ export const GroupDialog = ({
           )}
           {group === 'tab' && (
             <Box style={{ height: '100%' }}>
-              <TabComponent filter={filter} />
+              <TabComponent
+                filter={filter}
+                slicers={slicers}
+                sideSlicers={sideSlicers}
+              />
             </Box>
           )}
         </DialogContent>

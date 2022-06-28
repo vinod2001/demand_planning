@@ -19,8 +19,6 @@ import {
   faLinesLeaning,
   faShoePrints,
 } from '@fortawesome/free-solid-svg-icons'
-import Menu from '@material-ui/core/Menu'
-import MenuItem from '@material-ui/core/MenuItem'
 import Drawer from '@mui/material/Drawer'
 import { DrawerLayout } from './Drawer'
 

@@ -23,7 +23,6 @@ import {
   faFilter,
 } from '@fortawesome/free-solid-svg-icons'
 import { ColumnPicker } from './components/ColumnPicker'
-import { TableHeaderMenu } from './components/TableHeaderMenu'
 import { Groups } from './components/Groups'
 
 const useStyles = makeStyles((theme) => ({
@@ -113,10 +112,8 @@ export const Layout1 = () => {
     <Box className={classes.root}>
       <Grid container spacing={2}>
         <Grid item xs={12} sm={12} md={8}>
-          {/* <TableHeaderMenu heading={'Table 1'} />
-            <DisplayDynamicHeader storeType="partial" theme="ag-theme-alpine" /> */}
           <Paper className={clsx(classes.paper, 'paper')}>
-            <Groups tableHeader={'Table 1'} group={'group'} filter={false}/>
+            <Groups tableHeader={'Table 1'} group={'group'} filter={false} slicers={false} sideSlicers={false}/>
           </Paper>
         </Grid>
         <Grid item xs={12} sm={12} md={4}>
@@ -177,12 +174,8 @@ export const Layout1 = () => {
           </Grid>
         </Grid>
         <Grid item xs={12} sm={12} md={12}>
-          {/* <Paper className={classes.paper}>
-            <TableHeaderMenu heading={'Table 2'} />
-            <DisplayDynamicHeader storeType="partial" theme="ag-theme-alpine" />
-          </Paper> */}
           <Paper className={clsx(classes.paper, 'paper')}>
-            <Groups tableHeader={'Table 2'} group={'group'} filter={false} />
+            <Groups tableHeader={'Table 2'} group={'group'} filter={false}  slicers={false} sideSlicers={false}/>
           </Paper>
         </Grid>
       </Grid>

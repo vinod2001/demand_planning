@@ -1,15 +1,12 @@
-import React, { useState, KeyboardEvent, MouseEvent } from 'react'
+import React from 'react'
 import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
 import Box from '@mui/material/Box'
-import Grid from '@material-ui/core/Grid'
-import Paper from '@material-ui/core/Paper'
 import { makeStyles } from '@material-ui/core/styles'
 import { DisplayDynamicHeader } from '../agGrid/AgGridDynamic'
 import { TableHeaderMenu } from './TableHeaderMenu'
-import Drawer from '@mui/material/Drawer'
-import { DrawerLayout } from './Drawer'
-import { Groups } from './Groups'
+
+import { SlicersGroup } from './SlicersGroup'
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -56,9 +53,11 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 type Props = {
-  filter: boolean
+  filter: boolean,
+  slicers?: boolean,
+  sideSlicers?:boolean
 }
-export const TabComponent = ({ filter }: Props) => {
+export const TabComponent = ({ filter, slicers, sideSlicers }: Props) => {
   const classes = useStyles()
   const [value, setValue] = React.useState(0)
 
@@ -101,7 +100,8 @@ export const TabComponent = ({ filter }: Props) => {
         //   </Grid>
         // </Grid>
         <Box style={{ height: '100%', overflowY: 'scroll' }}>
-          <TableHeaderMenu heading={'Table 2'} filter={filter} />
+          {slicers && <SlicersGroup />}
+          <TableHeaderMenu heading={'Table 2'} filter={filter} sideSlicers={sideSlicers}/>
           <DisplayDynamicHeader storeType="partial" theme="ag-theme-alpine" />
         </Box>
         // </Paper>
@@ -124,7 +124,13 @@ export const TabComponent = ({ filter }: Props) => {
         // </Paper>
 
         <Box style={{ height: '100%', overflowY: 'scroll' }}>
-          <TableHeaderMenu heading={'Table 3'} filter={filter} />
+          {slicers && <SlicersGroup />}
+          <TableHeaderMenu
+            heading={'Table 3'}
+            filter={filter}
+            slicers={slicers}
+            sideSlicers={sideSlicers}
+          />
           <DisplayDynamicHeader storeType="partial" theme="ag-theme-alpine" />
         </Box>
       )}

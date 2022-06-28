@@ -85,7 +85,7 @@ const menuLists = [
   { name: 'Show Blueprint', icon: faShoePrints },
 ]
 
-export const Layout3 = () => {
+export const Layout4 = () => {
   const [dropFiles, setDropFiles] = useState()
   const [state, setState] = React.useState({
     top: false,
@@ -153,17 +153,32 @@ export const Layout3 = () => {
       <Grid container spacing={2}>
         <Grid item xs={12} sm={12} md={6}>
           <Paper className={clsx(classes.paper, 'paper')}>
-            <Groups tableHeader={'Table 1'} group={'group'}  filter={true} slicers={false} sideSlicers={true}/>
+            <Groups
+              tableHeader={'Table 1'}
+              group={'group'}
+              filter={true}
+              slicers={true}
+            />
           </Paper>
         </Grid>
         <Grid item xs={12} sm={12} md={6}>
           <Paper className={clsx(classes.paper, 'paper')}>
-            <Groups tableHeader={'Table 2'} group={'tab'}  filter={true}  slicers={false} sideSlicers={true}/>
+            <Groups
+              tableHeader={'Table 2'}
+              group={'tab'}
+              filter={true}
+              slicers={true}
+            />
           </Paper>
         </Grid>
         <Grid item xs={12} sm={12} md={12}>
           <Paper className={clsx(classes.paper, 'paper')}>
-            <Groups tableHeader={'Table 3'} group={'tab'}  filter={true}  slicers={false} sideSlicers={true}/>
+            <Groups
+              tableHeader={'Table 3'}
+              group={'tab'}
+              filter={true}
+              slicers={true}
+            />
           </Paper>
         </Grid>
       </Grid>
