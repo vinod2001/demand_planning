@@ -26,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: '#adc2d9',
     padding: '10px',
     width: '450px',
+    zIndex: 2,
   },
   paper: {
     padding: '10px',
@@ -64,9 +65,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 type Props = {
-  menuType?: string,
-  slicers?: boolean,
-  sideSlicers?:boolean
+  menuType?: string;
+  slicers?: boolean;
+  sideSlicers?: boolean;
 }
 export const DrawerLayout = ({ menuType, slicers, sideSlicers }: Props) => {
   const [dropFiles, setDropFiles] = useState()

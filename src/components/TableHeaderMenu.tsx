@@ -77,12 +77,17 @@ const menuLists = [
   { name: 'Show Blueprint', icon: faShoePrints },
 ]
 type Props = {
-  heading: string,
-  filter?:boolean,
-  slicers?:boolean,
-  sideSlicers?:boolean
+  heading: string;
+  filter?: boolean;
+  slicers?: boolean;
+  sideSlicers?: boolean;
 }
-export const TableHeaderMenu = ({ heading, filter, slicers, sideSlicers }: Props) => {
+export const TableHeaderMenu = ({
+  heading,
+  filter,
+  slicers,
+  sideSlicers,
+}: Props) => {
   const classes = useStyles()
   const [state, setState] = React.useState({
     top: false,
@@ -126,64 +131,67 @@ export const TableHeaderMenu = ({ heading, filter, slicers, sideSlicers }: Props
       >
         {heading}
       </Box>
-      {filter && <Box
-        display="flex"
-        justifyContent="flex-end"
-        style={{ border: '0px solid' }}
-      >
-        <FontAwesomeIcon
-          icon={faCaretSquareDown}
-          style={{
-            color: 'black',
-            fontSize: '20px',
-            paddingRight: '10px',
-            cursor: 'pointer',
-          }}
-          aria-controls="simple-menu"
-          aria-haspopup="true"
-          onClick={handleClick}
-        />
-        <FontAwesomeIcon
-          icon={faFilter}
-          style={{
-            color: 'black',
-            fontSize: '20px',
-            paddingRight: '10px',
-            cursor: 'pointer',
-          }}
-          onClick={toggleDrawer('right', true)}
-        />
-        <Menu
-          id="simple-menu"
-          anchorEl={menu.anchorEl}
-          keepMounted
-          open={Boolean(menu.anchorEl)}
-          onClose={handleClose}
-          MenuListProps={{
-            'aria-labelledby': 'basic-button',
-          }}
+      {filter && (
+        <Box
+          display="flex"
+          justifyContent="flex-end"
+          style={{ border: '0px solid' }}
         >
-          {menuLists.map((items) => (
-            <MenuItem style={{ padding: 0, margin: 0 }}>
-              <div style={{ display: 'flex' }}>
-                <div className={clsx(classes.subMenuBorder)}>
-                  <FontAwesomeIcon
-                    icon={items.icon}
-                    className={clsx(classes.pad, classes.menuIconsize)}
-                  />
+          <FontAwesomeIcon
+            icon={faCaretSquareDown}
+            style={{
+              color: 'black',
+              fontSize: '20px',
+              paddingRight: '10px',
+              cursor: 'pointer',
+            }}
+            aria-controls="simple-menu"
+            aria-haspopup="true"
+            onClick={handleClick}
+          />
+          <FontAwesomeIcon
+            icon={faFilter}
+            style={{
+              color: 'black',
+              fontSize: '20px',
+              paddingRight: '10px',
+              cursor: 'pointer',
+            }}
+            onClick={toggleDrawer('right', true)}
+          />
+          <Menu
+            id="simple-menu"
+            anchorEl={menu.anchorEl}
+            keepMounted
+            open={Boolean(menu.anchorEl)}
+            onClose={handleClose}
+            MenuListProps={{
+              'aria-labelledby': 'basic-button',
+            }}
+          >
+            {menuLists.map((items) => (
+              <MenuItem style={{ padding: 0, margin: 0 }}>
+                <div style={{ display: 'flex' }}>
+                  <div className={clsx(classes.subMenuBorder)}>
+                    <FontAwesomeIcon
+                      icon={items.icon}
+                      className={clsx(classes.pad, classes.menuIconsize)}
+                    />
+                  </div>
+                  <div className={clsx(classes.pad)}>{items.name}</div>
                 </div>
-                <div className={clsx(classes.pad)}>{items.name}</div>
-              </div>
-            </MenuItem>
-          ))}
-        </Menu>
-      </Box>}
+              </MenuItem>
+            ))}
+          </Menu>
+        </Box>
+      )}
       <Drawer
         anchor={'right'}
         open={state['right']}
         onClose={toggleDrawer('right', false)}
+        sx={{ zIndex: 4 }}
       >
-        <DrawerLayout slicers={slicers} sideSlicers={sideSlicers}/>
+        <DrawerLayout slicers={slicers} sideSlicers={sideSlicers} />
       </Drawer>
     </Box>
   )

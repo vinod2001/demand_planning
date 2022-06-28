@@ -9,6 +9,7 @@ import AppBar from '@mui/material/AppBar'
 import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
 import { MainHeaderMenu } from './components/MainHeaderMenu'
+import MiniDrawer from './LeftAndTopNav'
 
 export default function App() {
   const [value, setValue] = React.useState(0)
@@ -18,7 +19,8 @@ export default function App() {
   return (
     <>
       <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
-        <AppBar
+        <MiniDrawer />
+        {/* <AppBar
           position="static"
           style={{
             background: '#47617e', //#47617e
@@ -45,7 +47,7 @@ export default function App() {
         {value === 0 && <Layout1 />}
         {value === 1 && <Layout2 />}
         {value === 2 && <Layout3 />}
-        {value === 3 && <Layout4 />}
+        {value === 3 && <Layout4 />} */}
       </Box>
     </>
   )

@@ -35,7 +35,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     padding: theme.spacing(1),
   },
   '& .MuiModal-root-MuiDialog-root': {
-    zIndex: '1 !important',
+    zIndex: '5 !important',
   },
 }))
 
@@ -90,7 +90,7 @@ export const GroupDialog = ({
         aria-labelledby="customized-dialog-title"
         open={true}
         fullScreen
-        sx={{ zIndex: '1 !important' }}
+        sx={{ zIndex: '3 !important' }}
       >
         {/* <BootstrapDialogTitle onClose={() => setIsDialogOpen(false)}>
           Modal title
