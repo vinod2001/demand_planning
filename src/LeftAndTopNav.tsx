@@ -12,11 +12,12 @@ import IconButton from '@mui/material/IconButton'
 import MenuIcon from '@mui/icons-material/Menu'
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
 import ChevronRightIcon from '@mui/icons-material/ChevronRight'
+import ChevronLeftRounded from '@mui/icons-material/ChevronLeftRounded'
 import ListItem from '@mui/material/ListItem'
 import ListItemButton from '@mui/material/ListItemButton'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
-import InboxIcon from '@mui/icons-material/MoveToInbox'
+import HomeIcon from '@mui/icons-material/Home'
 import MailIcon from '@mui/icons-material/Mail'
 import { Layout1 } from './Layout1'
 import { Layout2 } from './Layout2'
@@ -26,6 +27,15 @@ import AppBar from '@mui/material/AppBar'
 import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
 import { MainHeaderMenu } from './components/MainHeaderMenu'
+import ApptioLogo from './images/ApptioLogo.jpeg'
+import logoFull from './images/logoFull.png'
+import NextPlanIcon from '@mui/icons-material/NextPlan'
+import KeyboardDoubleArrowLeftRoundedIcon from '@mui/icons-material/KeyboardDoubleArrowLeftRounded'
+import KeyboardDoubleArrowRightRoundedIcon from '@mui/icons-material/KeyboardDoubleArrowRightRounded'
+import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded'
+import PersonRoundedIcon from '@mui/icons-material/PersonRounded'
+import QuestionMarkIcon from '@mui/icons-material/QuestionMark'
+import { initial } from 'lodash'
 
 const drawerWidth = 240
 
@@ -71,6 +81,8 @@ const Appbar = styled(MuiAppBar, {
   theme.zIndex.drawer = 1
   return {
     zIndex: theme.zIndex.drawer + 1,
+    background: '#fff',
+    width: `calc(100% - ${65}px)`,
     transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
@@ -94,7 +106,6 @@ const Drawer = styled(MuiDrawer, {
   flexShrink: 0,
   whiteSpace: 'nowrap',
   boxSizing: 'border-box',
-  background: '#333',
   ...(open && {
     ...openedMixin(theme),
     '& .MuiDrawer-paper': openedMixin(theme),
@@ -125,9 +136,34 @@ export default function MiniDrawer() {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <Appbar position="fixed" open={open}>
-        <Toolbar>
-          <IconButton
+      <Appbar
+        position="fixed"
+        open={open}
+        sx={{ boxShadow: 0, padding: '0px', height: '64px' }}
+      >
+        <Toolbar
+          sx={{
+            width: '100%',
+            display: 'flex',
+            justifyContent: 'space-between',
+          }}
+        >
+          <Box sx={{ justifyContent: 'flex-start', color: '#333' }}>
+            <h2>Demand Planning</h2>
+          </Box>
+          <Box sx={{ justifyContent: 'flex-end' }}>
+            <IconButton>
+              <QuestionMarkIcon />
+            </IconButton>
+            <IconButton>
+              <SettingsRoundedIcon />
+            </IconButton>
+            <IconButton>
+              <PersonRoundedIcon />
+            </IconButton>
+          </Box>
+
+          {/* <IconButton
             color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
@@ -139,30 +175,50 @@ export default function MiniDrawer() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Mini variant drawer
-          </Typography>
+          <Typography variant="h6" noWrap component="div"></Typography> */}
         </Toolbar>
       </Appbar>
       <Drawer variant="permanent" open={open} sx={{ zIndex: '1 !important' }}>
-        <DrawerHeader sx={{ zIndex: '1 !important' }}>
-          <IconButton onClick={handleDrawerClose}>
+        <DrawerHeader
+          sx={{ zIndex: '1 !important', justifyContent: 'flex-start' }}
+        >
+          {/* <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'rtl' ? (
               <ChevronRightIcon />
             ) : (
               <ChevronLeftIcon />
             )}
-          </IconButton>
+          </IconButton> */}
+          {open === true ? (
+            <img
+              src={logoFull}
+              style={{
+                width: '147px',
+                height: '37px',
+                justifyContent: 'flex-start',
+              }}
+            />
+          ) : (
+            <img
+              src={ApptioLogo}
+              style={{
+                width: '40px',
+                height: '40px',
+              }}
+            />
+          )}
         </DrawerHeader>
         <Divider />
         <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+          {['Home', 'Demand Planning'].map((text, index) => (
             <ListItem key={text} disablePadding sx={{ display: 'block' }}>
               <ListItemButton
                 sx={{
                   minHeight: 48,
                   justifyContent: open ? 'initial' : 'center',
                   px: 2.5,
+                  background:
+                    text === 'Demand Planning' ? '#ebebeb' : 'initial',
                 }}
               >
                 <ListItemIcon
@@ -172,14 +228,14 @@ export default function MiniDrawer() {
                     justifyContent: 'center',
                   }}
                 >
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                  {index % 2 === 0 ? <HomeIcon /> : <NextPlanIcon />}
                 </ListItemIcon>
                 <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>
             </ListItem>
           ))}
         </List>
-        <Divider />
+        {/* <Divider />
         <List>
           {['All mail', 'Trash', 'Spam'].map((text, index) => (
             <ListItem key={text} disablePadding sx={{ display: 'block' }}>
@@ -203,38 +259,94 @@ export default function MiniDrawer() {
               </ListItemButton>
             </ListItem>
           ))}
-        </List>
+        </List> */}
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+      <Box component="main" sx={{ flexGrow: 1, background: '#adc2d9' }}>
         <DrawerHeader />
-        <AppBar
-          position="static"
-          style={{
-            background: '#47617e', //#47617e
-            display: 'flex',
-            color: 'white',
-          }}
-        >
-          <Tabs
-            value={value}
-            onChange={handleChange}
-            indicatorColor="primary"
-            textColor="inherit"
-            variant="fullWidth"
-            aria-label="full width tabs example"
+        <div>
+          {open === true ? (
+            <IconButton
+              onClick={handleDrawerClose}
+              sx={{
+                marginLeft: '-15px',
+                marginTop: '-15px',
+                justifyContent: 'flex-end',
+                zIndex: 3,
+                border: '1px solid #ccc',
+                width: '30px',
+                height: '30px',
+                position: 'fixed',
+                background: '#ccc',
+              }}
+            >
+              <KeyboardDoubleArrowLeftRoundedIcon
+                style={{
+                  width: '20px',
+                  height: '20px',
+                  position: 'relative',
+                  left: '4px',
+                }}
+              />
+            </IconButton>
+          ) : (
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              edge="start"
+              sx={{
+                marginLeft: '-15px',
+                marginTop: '-15px',
+                justifyContent: 'flex-end',
+                zIndex: 3,
+                border: '1px solid #ccc',
+                width: '30px',
+                height: '30px',
+                position: 'fixed',
+                background: '#ccc',
+              }}
+            >
+              <KeyboardDoubleArrowRightRoundedIcon
+                style={{
+                  width: '20px',
+                  height: '20px',
+                  position: 'relative',
+                  left: '4px',
+                }}
+              />
+            </IconButton>
+          )}
+        </div>
+        <div>
+          <AppBar
+            position="static"
+            style={{
+              background: '#47617e', //#47617e
+              display: 'flex',
+              color: 'white',
+            }}
           >
-            <Tab label="Layout 1" sx={{ borderRight: '1px solid #5b7fa6' }} />
-            <Tab label="Layout 2" sx={{ borderRight: '1px solid #5b7fa6' }} />
-            <Tab label="Layout 3" sx={{ borderRight: '1px solid #5b7fa6' }} />
-            <Tab label="Layout 4" />
-          </Tabs>
-        </AppBar>
+            <Tabs
+              value={value}
+              onChange={handleChange}
+              indicatorColor="primary"
+              textColor="inherit"
+              variant="fullWidth"
+              aria-label="full width tabs example"
+            >
+              <Tab label="Layout 1" sx={{ borderRight: '1px solid #5b7fa6' }} />
+              <Tab label="Layout 2" sx={{ borderRight: '1px solid #5b7fa6' }} />
+              <Tab label="Layout 3" sx={{ borderRight: '1px solid #5b7fa6' }} />
+              <Tab label="Layout 4" />
+            </Tabs>
+          </AppBar>
 
-        {/* <MainHeaderMenu /> */}
-        {value === 0 && <Layout1 />}
-        {value === 1 && <Layout2 />}
-        {value === 2 && <Layout3 />}
-        {value === 3 && <Layout4 />}
+          {/* <MainHeaderMenu /> */}
+          {value === 0 && <Layout1 />}
+          {value === 1 && <Layout2 />}
+          {value === 2 && <Layout3 />}
+          {value === 3 && <Layout4 />}
+        </div>
       </Box>
     </Box>
   )
