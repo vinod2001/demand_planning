@@ -139,7 +139,12 @@ export default function MiniDrawer() {
       <Appbar
         position="fixed"
         open={open}
-        sx={{ boxShadow: 0, padding: '0px', height: '64px' }}
+        sx={{
+          boxShadow: 0,
+          padding: '0px',
+          height: '64px',
+          borderBottom: '1px solid #ccc',
+        }}
       >
         <Toolbar
           sx={{
