@@ -53,11 +53,16 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 type Props = {
-  filter: boolean,
-  slicers?: boolean,
-  sideSlicers?:boolean
+  filter: boolean;
+  slicers?: boolean;
+  sideSlicers?:boolean;
+  layout?:{
+    type:string,
+    withoutTab:number
+  };
+  group?: string;
 }
-export const TabComponent = ({ filter, slicers, sideSlicers }: Props) => {
+export const TabComponent = ({ filter, slicers, sideSlicers, layout, group }: Props) => {
   const classes = useStyles()
   const [value, setValue] = React.useState(0)
 
@@ -99,10 +104,10 @@ export const TabComponent = ({ filter, slicers, sideSlicers }: Props) => {
         //     {/* <Groups tableHeader={'Table 2'} /> */}
         //   </Grid>
         // </Grid>
-        <Box style={{ height: '100%', overflowY: 'scroll' }}>
+        <Box style={{ height: '100%' }}>
           {slicers && <SlicersGroup />}
           <TableHeaderMenu heading={'Table 2'} filter={filter} sideSlicers={sideSlicers}/>
-          <DisplayDynamicHeader storeType="partial" theme="ag-theme-alpine" />
+          <DisplayDynamicHeader storeType="partial" theme="ag-theme-alpine" group={group} layout={layout} />
         </Box>
         // </Paper>
       )}
@@ -131,7 +136,7 @@ export const TabComponent = ({ filter, slicers, sideSlicers }: Props) => {
             slicers={slicers}
             sideSlicers={sideSlicers}
           />
-          <DisplayDynamicHeader storeType="partial" theme="ag-theme-alpine" />
+          <DisplayDynamicHeader storeType="partial" theme="ag-theme-alpine" layout={layout}/>
         </Box>
       )}
     </Box>

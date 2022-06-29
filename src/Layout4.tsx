@@ -158,6 +158,7 @@ export const Layout4 = () => {
               group={'group'}
               filter={true}
               slicers={true}
+              layout={{type:'layout4',withoutTab:100}}
             />
           </Paper>
         </Grid>
@@ -168,6 +169,7 @@ export const Layout4 = () => {
               group={'tab'}
               filter={true}
               slicers={true}
+              layout={{type:'layout4',withoutTab:100}}
             />
           </Paper>
         </Grid>
@@ -178,6 +180,7 @@ export const Layout4 = () => {
               group={'tab'}
               filter={true}
               slicers={true}
+              layout={{type:'layout4',withoutTab:100}}
             />
           </Paper>
         </Grid>

@@ -20,11 +20,21 @@ import Box from '@mui/material/Box'
 import { camelCase } from 'lodash'
 
 type Props = {
-  storeType: 'partial' | 'full',
-  theme: any
+  storeType: 'partial' | 'full';
+  theme: any;
+  layout?: {
+    type: string;
+    withoutTab: number;
+  };
+  group?: string;
 }
 
-export const DisplayDynamicHeader = ({ storeType, theme }: Props) => {
+export const DisplayDynamicHeader = ({
+  storeType,
+  theme,
+  layout,
+  group,
+}: Props) => {
   const defaultColDef = useMemo(() => {
     return {
       flex: 1,
@@ -134,8 +144,30 @@ export const DisplayDynamicHeader = ({ storeType, theme }: Props) => {
     //   })
     params.api.setServerSideDatasource(datasource)
   }
+  const checkHeight = ():string => {
+    if(layout?.type === 'layout4' && group === 'tab'){
+      return '80%'
+    }
+    else if(layout?.type === 'layout3' && group === 'tab'){
+      return '92%'
+    }
+    else if(layout?.type === 'layout4' && group !== 'tab'){
+      return '88%'
+    }
+    else if(layout?.type === 'layout3' && group !== 'tab'){
+      return '100%'
+    }
+    else{
+      return '100%'
+    }
+  }
   return (
-    <div style={containerStyle}>
+    <div
+      style={{
+        width: '100%',
+        height: checkHeight(),
+      }}
+    >
       <div style={gridStyle} className={theme}>
         <AgGridReact
           ref={gridRef}

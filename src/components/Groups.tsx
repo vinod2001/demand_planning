@@ -8,6 +8,10 @@ type Props = {
   filter: boolean;
   slicers?: boolean;
   sideSlicers?: boolean;
+  layout?:{
+    type:string,
+    withoutTab:number
+  };
 }
 import Box from '@mui/material/Box'
 import { SlicersGroup } from './SlicersGroup'
@@ -17,6 +21,7 @@ export const Groups = ({
   filter,
   slicers,
   sideSlicers,
+  layout,
 }: Props) => {
   return (
     <>
@@ -36,7 +41,7 @@ export const Groups = ({
             slicers={slicers}
             sideSlicers={sideSlicers}
           />
-          <DisplayDynamicHeader storeType="partial" theme="ag-theme-alpine" />
+          <DisplayDynamicHeader storeType="partial" theme="ag-theme-alpine" layout={layout}/>
         </Box>
       )}
       {group === 'tab' && (
@@ -52,6 +57,8 @@ export const Groups = ({
             filter={filter}
             slicers={slicers}
             sideSlicers={sideSlicers}
+            layout={layout}
+            group={'tab'}
           />
         </Box>
       )}

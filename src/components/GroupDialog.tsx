@@ -25,6 +25,10 @@ type Props = {
   group: string;
   slicers?: boolean;
   sideSlicers?: boolean;
+  layout?: {
+    type: string;
+    withoutTab: number
+  };
 }
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -81,6 +85,7 @@ export const GroupDialog = ({
   group,
   slicers,
   sideSlicers,
+  layout
 }: Props) => {
   const classes = useStyles()
   return (
@@ -120,6 +125,7 @@ export const GroupDialog = ({
               <DisplayDynamicHeader
                 storeType="partial"
                 theme="ag-theme-alpine"
+                layout={layout}
               />
             </Box>
           )}
@@ -129,6 +135,7 @@ export const GroupDialog = ({
                 filter={filter}
                 slicers={slicers}
                 sideSlicers={sideSlicers}
+                layout={layout}
               />
             </Box>
           )}
