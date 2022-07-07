@@ -6,15 +6,22 @@ import { filterHeader, checkDomain } from '../utils/utils'
 import { AutocompleteComponent } from './Autocomplete'
 import Box from '@mui/material/Box'
 
-export const SlicersGroup = () => {
+type Props = {
+  type?: string;
+  id?:number;
+  setSlicers?:(args:any)=>void;
+}
+export const SlicersGroup = ({type, id, setSlicers}:Props) => {
   return (
     <>
-      <Box display="flex" justifyContent="flex-start" sx={{ m: 0.5,mb:1, mt:1.5 }}>
-        <Box sx={{ mr: 1,minWidth:'10px', }}>
-          <AutocompleteComponent />
+      <Box display="flex" justifyContent="flex-start" sx={{ m: 0.5, }}>
+        <Box sx={{ mr: 1,minWidth:'10px' }}>
+          <AutocompleteComponent id={id}
+            setSlicers={setSlicers} />
         </Box>
         <Box sx={{ mr: 1 }}>
-          <AutocompleteComponent />
+          <AutocompleteComponent id={id}
+            setSlicers={setSlicers} />
         </Box>
       </Box>
     </>

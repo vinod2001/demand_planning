@@ -115,7 +115,7 @@ export const GroupDialog = ({
         <DialogContent dividers>
           {group === 'group' && (
             <Box style={{ height: '100%' }}>
-              {slicers && <SlicersGroup />}
+              {/* {slicers && <SlicersGroup />} */}
               <TableHeaderMenu
                 heading={heading}
                 filter={filter}

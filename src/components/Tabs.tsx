@@ -105,8 +105,8 @@ export const TabComponent = ({ filter, slicers, sideSlicers, layout, group }: Pr
         //   </Grid>
         // </Grid>
         <Box style={{ height: '100%' }}>
-          {slicers && <SlicersGroup />}
-          <TableHeaderMenu heading={'Table 2'} filter={filter} sideSlicers={sideSlicers}/>
+          {/* {slicers && <SlicersGroup />} */}
+          <TableHeaderMenu heading={'Table 2'} filter={filter} sideSlicers={sideSlicers} slicers={slicers}/>
           <DisplayDynamicHeader storeType="partial" theme="ag-theme-alpine" group={group} layout={layout} />
         </Box>
         // </Paper>
@@ -129,7 +129,7 @@ export const TabComponent = ({ filter, slicers, sideSlicers, layout, group }: Pr
         // </Paper>
 
         <Box style={{ height: '100%', overflowY: 'scroll' }}>
-          {slicers && <SlicersGroup />}
+          {/* {slicers && <SlicersGroup />} */}
           <TableHeaderMenu
             heading={'Table 3'}
             filter={filter}

@@ -94,7 +94,10 @@ export const DisplayDynamicHeader = ({
         //Filtering
         const filterKeys = Object.keys(filterModel)
         filterKeys.forEach((filter) => {
-          url += `${filter}=${filterModel[filter].filter}&`
+          const value =
+            filterModel[filter].filter.charAt(0).toUpperCase() +
+            filterModel[filter].filter.slice(1)
+          url += `${filter}=${value}&`
         })
         fetch(url)
           .then((httpResponse) => httpResponse.json())
@@ -144,20 +147,16 @@ export const DisplayDynamicHeader = ({
     //   })
     params.api.setServerSideDatasource(datasource)
   }
-  const checkHeight = ():string => {
-    if(layout?.type === 'layout4' && group === 'tab'){
+  const checkHeight = (): string => {
+    if (layout?.type === 'layout4' && group === 'tab') {
       return '80%'
-    }
-    else if(layout?.type === 'layout3' && group === 'tab'){
+    } else if (layout?.type === 'layout3' && group === 'tab') {
       return '92%'
-    }
-    else if(layout?.type === 'layout4' && group !== 'tab'){
+    } else if (layout?.type === 'layout4' && group !== 'tab') {
       return '88%'
-    }
-    else if(layout?.type === 'layout3' && group !== 'tab'){
+    } else if (layout?.type === 'layout3' && group !== 'tab') {
       return '100%'
-    }
-    else{
+    } else {
       return '100%'
     }
   }
@@ -177,6 +176,7 @@ export const DisplayDynamicHeader = ({
           // pagination={true}
           // paginationPageSize={500}
           animateRows={true}
+          // sideBar={true}
           serverSideStoreType={storeType}
           enableRangeSelection={true}
           onGridReady={onGridReady}

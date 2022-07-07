@@ -12,6 +12,8 @@ type Props = {
     type:string,
     withoutTab:number
   };
+  id?:number;
+  setSlicers?:(args:any)=>void;
 }
 import Box from '@mui/material/Box'
 import { SlicersGroup } from './SlicersGroup'
@@ -22,6 +24,8 @@ export const Groups = ({
   slicers,
   sideSlicers,
   layout,
+  id,
+  setSlicers
 }: Props) => {
   return (
     <>
@@ -34,12 +38,14 @@ export const Groups = ({
             slicers={slicers}
             sideSlicers={sideSlicers}
           />
-          {slicers && <SlicersGroup />}
+          {/* {slicers && <SlicersGroup />} */}
           <TableHeaderMenu
             heading={tableHeader}
             filter={filter}
             slicers={slicers}
             sideSlicers={sideSlicers}
+            id={id}
+            setSlicers={setSlicers} 
           />
           <DisplayDynamicHeader storeType="partial" theme="ag-theme-alpine" layout={layout}/>
         </Box>

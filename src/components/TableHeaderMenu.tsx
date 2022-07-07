@@ -18,6 +18,7 @@ import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
 import Drawer from '@mui/material/Drawer'
 import { DrawerLayout } from './Drawer'
+import { SlicersGroup } from './SlicersGroup'
 
 type Anchor = 'top' | 'left' | 'bottom' | 'right'
 
@@ -81,12 +82,16 @@ type Props = {
   filter?: boolean;
   slicers?: boolean;
   sideSlicers?: boolean;
+  id?:number;
+  setSlicers?:(args:any)=>void;
 }
 export const TableHeaderMenu = ({
   heading,
   filter,
   slicers,
   sideSlicers,
+  id,
+  setSlicers
 }: Props) => {
   const classes = useStyles()
   const [state, setState] = React.useState({
@@ -126,16 +131,28 @@ export const TableHeaderMenu = ({
       }}
     >
       <Box
-        display="flex"
-        style={{ border: '0px solid', fontWeight: 'bold', color: '#333' }}
+        style={{
+          display: 'flex',
+          border: '0px solid',
+          fontWeight: 'bold',
+          color: '#333',
+          alignItems: 'center',
+          flex: '1 1 auto', 
+          minWidth:'100px',
+        }}
       >
         {heading}
+      </Box>
+      <Box style={{ alignItems: 'center' }}>
+        {slicers && <SlicersGroup type={'inner'} id={id}
+            setSlicers={setSlicers}  />}
       </Box>
       {filter && (
         <Box
           display="flex"
           justifyContent="flex-end"
-          style={{ border: '0px solid' }}
+          style={{ border: '0px solid', alignItems: 'center',
+          }}
         >
           <FontAwesomeIcon
             icon={faCaretSquareDown}

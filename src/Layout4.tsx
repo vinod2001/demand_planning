@@ -1,5 +1,5 @@
 import './styles.css'
-import React, { useState, KeyboardEvent, MouseEvent } from 'react'
+import React, { useState, KeyboardEvent, MouseEvent, useEffect } from 'react'
 import { DisplayGridFull } from './agGrid/AgGrid'
 import { DisplayGrid } from './agGrid/AgGrid copy'
 import { DisplayGridClient } from './agGrid/AgGrid copy 2'
@@ -147,6 +147,16 @@ export const Layout4 = () => {
     setMenu({ anchorEl: null })
   }
 
+  const [slicers, setSlicers] =  React.useState({
+    slicer1:'',
+    slicer2:'',
+    slicer3:'',
+  })
+
+  useEffect(() =>{
+    console.log(slicers)
+  },[slicers])
+
   const classes = useStyles()
   return (
     <Box className={classes.root}>
@@ -159,6 +169,8 @@ export const Layout4 = () => {
               filter={true}
               slicers={true}
               layout={{type:'layout4',withoutTab:100}}
+              id={1}
+              setSlicers={setSlicers} 
             />
           </Paper>
         </Grid>
@@ -170,6 +182,8 @@ export const Layout4 = () => {
               filter={true}
               slicers={true}
               layout={{type:'layout4',withoutTab:100}}
+              id={2}
+              setSlicers={setSlicers} 
             />
           </Paper>
         </Grid>
@@ -181,6 +195,8 @@ export const Layout4 = () => {
               filter={true}
               slicers={true}
               layout={{type:'layout4',withoutTab:100}}
+              id={3}
+              setSlicers={setSlicers} 
             />
           </Paper>
         </Grid>
