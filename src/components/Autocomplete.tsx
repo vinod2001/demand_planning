@@ -1,11 +1,18 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 // import Autocomplete from '@mui/material/Autocomplete'
 //import { Autocomplete, createFilterOptions } from "@material-ui/lab";
 //import TextField from '@mui/material/TextField'
 //import Stack from '@mui/material/Stack'
-import { filterHeader, checkDomain } from '../utils/utils'
-import { withStyles } from '@material-ui/core/styles'
-import { Stack, Autocomplete, TextField } from '@mui/material'
+import { filterHeader, checkDomain } from "../utils/utils";
+import { withStyles } from "@material-ui/core/styles";
+import { Stack, Autocomplete, TextField } from "@mui/material";
+import { GridReadyEvent } from "ag-grid-community";
 
 // const StyledAutocomplete = withStyles({
 //   tag: {
@@ -20,74 +27,169 @@ import { Stack, Autocomplete, TextField } from '@mui/material'
 
 type Props = {
   type?: string;
-  id?:number;
-  setSlicers?:(args:any)=>void;
-}
+  id?: number;
+  nameSlicer?: string;
+  setSlicers?: (args: any) => void;
+  setNewFilterModel?: ({}) => void;
+  newFilterModel?: {};
+};
 
-const items = [
+const postId = [
   {
-    field: '2000',
+    field: "1",
   },
   {
-    field: '2002',
+    field: "2",
   },
   {
-    field: '2008',
+    field: "3",
   },
   {
-    field: '2009',
+    field: "4",
   },
   {
-    field: '2010',
+    field: "5",
   },
   {
-    field: '2011',
+    field: "6",
   },
   {
-    field: '2012',
+    field: "7",
   },
-]
+];
+const year = [
+  {
+    field: "2000",
+  },
+  {
+    field: "2004",
+  },
+  {
+    field: "2008",
+  },
+  {
+    field: "2009",
+  },
+  {
+    field: "2010",
+  },
+  {
+    field: "2011",
+  },
+  {
+    field: "2012",
+  },
+];
+const email = [
+  {
+    field: "Eliseo@gardner.biz",
+  },
+  {
+    field: "Jayne_Kuhic@sydney.com",
+  },
+  {
+    field: "Nikita@garfield.biz",
+  },
+  {
+    field: "Lew@alysha.tv",
+  },
+  {
+    field: "Presley.Mueller@myrl.com",
+  },
+  {
+    field: "Hayden@althea.biz",
+  },
+  {
+    field: "Dallas@ole.me",
+  },
+];
+const sport = [
+  {
+    field: "Swimming",
+  },
+  {
+    field: "Gymnastics",
+  },
+  {
+    field: "Speed Skating",
+  },
+  {
+    field: "Cross Country Skiing",
+  },
+  {
+    field: "Short-Track Speed Skating",
+  },
+  {
+    field: "Diving",
+  },
+  {
+    field: "Cycling",
+  },
+];
 
-export const AutocompleteComponent = ({id, setSlicers}:Props) => {
-  const [lists, setLists] = useState<any[]>([])
-  const { urls } = checkDomain(0)
-  const handleChange = (event: React.SyntheticEvent, values:any) => {
-    console.log(values[0].field)
-    if(setSlicers){
-    setSlicers((prevState: any)=> {
-      return {...prevState,slicer1:values[0].field}
-    }) 
-  } 
-  } 
+export const AutocompleteComponent = ({
+  id,
+  setSlicers,
+  nameSlicer,
+  setNewFilterModel,
+  newFilterModel,
+}: Props) => {
+  const [lists, setLists] = useState<any[]>([]);
+  const handleChange = (event: React.SyntheticEvent, values: any) => {
+    if (setSlicers) {
+      // console.log(values[0]?.field, values);
+      let valueSport: string[] = [];
+      let valueYear: string[] = [];
+
+      typeof values[0]?.field === "string"
+        ? values.map((value: any) => {
+            valueSport = [...valueSport, value.field];
+          })
+        : values.map((value: any) => {
+            valueYear = [...valueYear, value.field];
+          });
+
+      nameSlicer === "Sport"
+        ? setNewFilterModel?.({ ...newFilterModel, sport: valueSport })
+        : nameSlicer === "PostId"
+        ? setNewFilterModel?.({ ...newFilterModel, sport: valueSport })
+        : nameSlicer === "Email"
+        ? setNewFilterModel?.({ ...newFilterModel, year: valueSport })
+        : nameSlicer === "Year"
+        ? setNewFilterModel?.({ ...newFilterModel, year: valueSport })
+        : null;
+    }
+  };
+
   useEffect(() => {
-    setLists(items)
-    // if (urls) {
-    //   fetch(urls)
-    //     .then((res) => res.json())
-    //     .then((data) => {
-    //       const items = filterHeader(data)
-    //       setLists(items)
-    //     })
-    // }
-  }, [])
+    setLists(
+      nameSlicer === "Sport"
+        ? sport
+        : nameSlicer === "PostId"
+        ? postId
+        : nameSlicer === "Email"
+        ? email
+        : year
+    );
+  }, []);
+
   return (
     <>
-      <Stack sx={{ minWidth: '100px' }}>
+      <Stack sx={{ minWidth: "100px" }}>
         <Autocomplete
           multiple
           id="tags-standard"
+          limitTags={1}
           options={lists}
           getOptionLabel={(option: any) => {
-            return option.field
+            return option.field;
           }}
           defaultValue={lists[0]}
-          renderInput={(params) => (
-            <TextField {...params} label="Slicer" placeholder="Favorites" />
-          )}
+          renderInput={(params) => <TextField {...params} label={nameSlicer} />}
           size="small"
           onChange={handleChange}
         />
       </Stack>
     </>
-  )
-}
+  );
+};

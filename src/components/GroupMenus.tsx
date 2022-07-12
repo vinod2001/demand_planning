@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
-import Box from '@mui/material/Box'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import React, { useState } from "react";
+import Box from "@mui/material/Box";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCircleArrowLeft,
   faCircleArrowRight,
@@ -9,9 +9,9 @@ import {
   faFileExcel,
   faFilter,
   faMaximize,
-} from '@fortawesome/free-solid-svg-icons'
-import Button from '@mui/material/Button'
-import { GroupDialog } from './GroupDialog'
+} from "@fortawesome/free-solid-svg-icons";
+import Button from "@mui/material/Button";
+import { GroupDialog } from "./GroupDialog";
 
 type Props = {
   heading: string;
@@ -19,39 +19,51 @@ type Props = {
   group: string;
   slicers?: boolean;
   sideSlicers?: boolean;
-}
+  onGridReady: any;
+  setNewFilterModel: (arg: any) => void;
+  newFilterModel: {};
+  id: number;
+};
 export const GroupMenus = ({
   heading,
   filter,
   group,
   slicers,
   sideSlicers,
+  onGridReady,
+  newFilterModel,
+  setNewFilterModel,
+  id,
 }: Props) => {
-  const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false)
+  const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
   return (
     <>
       <Box
-        display={'flex'}
-        justifyContent={'flex-end'}
-        style={{ background: '#fff', padding: '5px', border: '0px solid' }}
+        display={"flex"}
+        justifyContent={"flex-end"}
+        style={{ background: "#fff", padding: "5px", border: "0px solid" }}
       >
         <FontAwesomeIcon
           icon={faMaximize}
           onClick={() => setIsDialogOpen(true)}
-          style={{ cursor: 'pointer' }}
+          style={{ cursor: "pointer" }}
         />
       </Box>
       {isDialogOpen && (
         <GroupDialog
+          id={id}
           heading={heading}
           filter={filter}
           setIsDialogOpen={setIsDialogOpen}
           group={group}
           slicers={slicers}
+          onGridReady={onGridReady}
           sideSlicers={sideSlicers}
-          layout={{ type: 'dialog', withoutTab: 100 }}
+          layout={{ type: "dialog", withoutTab: 100 }}
+          newFilterModel={newFilterModel}
+          setNewFilterModel={setNewFilterModel}
         />
       )}
     </>
-  )
-}
+  );
+};
