@@ -4,6 +4,7 @@ import { TableHeaderMenu } from "./TableHeaderMenu";
 import { TabComponent } from "./Tabs";
 import { filterHeader, checkDomain } from "../utils/utils";
 import { AgGridReact } from "ag-grid-react";
+import { NavigationButton} from "./NavigationButton"
 
 type Props = {
   tableHeader: string;
@@ -16,8 +17,8 @@ type Props = {
     withoutTab: number;
   };
   setSlicers?: (args: any) => void;
-
   id: number;
+  navigation?:{};
 };
 import Box from "@mui/material/Box";
 import { SlicersGroup } from "./SlicersGroup";
@@ -41,6 +42,7 @@ export const Groups = ({
   layout,
   id,
   setSlicers,
+  navigation,
 }: Props) => {
   const [newFilterModel, setNewFilterModel] = useState<newFilter>({
     sport: [],
@@ -167,6 +169,7 @@ export const Groups = ({
             id={id}
           />
           {/* {slicers && <SlicersGroup />} */}
+          <NavigationButton/>
           <TableHeaderMenu
             heading={tableHeader}
             filter={filter}

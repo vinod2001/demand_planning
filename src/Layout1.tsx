@@ -1,19 +1,19 @@
-import "./styles.css";
-import React, { useState } from "react";
-import { DisplayGridFull } from "./agGrid/AgGrid";
-import { DisplayGrid } from "./agGrid/AgGrid copy";
-import { DisplayGridClient } from "./agGrid/AgGrid copy 2";
-import { DisplayDynamicHeader } from "./agGrid/AgGridDynamic";
-import Box from "@mui/material/Box";
+import './styles.css'
+import React, { useState } from 'react'
+import { DisplayGridFull } from './agGrid/AgGrid'
+import { DisplayGrid } from './agGrid/AgGrid copy'
+import { DisplayGridClient } from './agGrid/AgGrid copy 2'
+import { DisplayDynamicHeader } from './agGrid/AgGridDynamic'
+import Box from '@mui/material/Box'
 // import Grid from '@mui/material/Grid'
-import { AutocompleteComponent } from "./components/Autocomplete";
-import { makeStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
-import Grid from "@material-ui/core/Grid";
-import clsx from "clsx";
-import { useDropzone } from "react-dropzone";
-import Button from "@mui/material/Button";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { AutocompleteComponent } from './components/Autocomplete'
+import { makeStyles } from '@material-ui/core/styles'
+import Paper from '@material-ui/core/Paper'
+import Grid from '@material-ui/core/Grid'
+import clsx from 'clsx'
+import { useDropzone } from 'react-dropzone'
+import Button from '@mui/material/Button'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faCircleArrowLeft,
   faCircleArrowRight,
@@ -21,59 +21,59 @@ import {
   faArrowDown91,
   faFileExcel,
   faFilter,
-} from "@fortawesome/free-solid-svg-icons";
-import { ColumnPicker } from "./components/ColumnPicker";
-import { Groups } from "./components/Groups";
+} from '@fortawesome/free-solid-svg-icons'
+import { ColumnPicker } from './components/ColumnPicker'
+import { Groups } from './components/Groups'
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    backgroundColor: "#adc2d9",
-    padding: "10px",
+    backgroundColor: '#adc2d9',
+    padding: '10px',
   },
   paper: {
-    padding: "10px",
+    padding: '10px',
     color: theme.palette.text.secondary,
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
   },
   pad: {
-    padding: "10px",
+    padding: '10px',
   },
   mar: {
-    marginTop: "10px",
+    marginTop: '10px',
   },
   fileUploader: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-between",
-    background: "#fff",
-    borderRadius: "20px",
-    padding: "20px",
-    width: "100%",
-    boxSizing: "border-box",
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    background: '#fff',
+    borderRadius: '20px',
+    padding: '20px',
+    width: '100%',
+    boxSizing: 'border-box',
   },
   h4: {
-    textTransform: "uppercase",
-    textAlign: "center",
+    textTransform: 'uppercase',
+    textAlign: 'center',
   },
   dropzone: {
-    height: "168px",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    border: "2px dashed #d1ddf8",
-    borderRadius: "20px",
-    cursor: "pointer",
-    padding: "15px",
+    height: '168px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    border: '2px dashed #d1ddf8',
+    borderRadius: '20px',
+    cursor: 'pointer',
+    padding: '15px',
   },
-}));
+}))
 
 export const Layout1 = () => {
-  const [dropFiles, setDropFiles] = useState();
-  const maxLength = 20;
-  const filesArray: any[] = [];
+  const [dropFiles, setDropFiles] = useState()
+  const maxLength = 20
+  const filesArray: any[] = []
   const fileValidator = (file: any) => {
-    filesArray.push(file.name);
+    filesArray.push(file.name)
     // console.log(
     //   "fileValidator",
     //   filesArray.indexOf(file.name),
@@ -81,20 +81,20 @@ export const Layout1 = () => {
     // );
     if (file.name.length > maxLength) {
       return {
-        code: "name-too-large",
+        code: 'name-too-large',
         message: `Name is larger than ${maxLength} characters`,
         type: file.type,
-      };
+      }
     }
     if (filesArray.indexOf(file.name) === -1) {
       return {
-        code: "same-filename",
+        code: 'same-filename',
         message: `the file name "${file.name}" is already exist`,
         type: file.type,
-      };
+      }
     }
-    return null;
-  };
+    return null
+  }
   const { getRootProps, getInputProps, fileRejections } = useDropzone({
     validator: fileValidator,
     onDrop: (acceptedFiles: any) => {
@@ -102,25 +102,26 @@ export const Layout1 = () => {
         acceptedFiles.map((file: any) =>
           Object.assign(file, {
             preview: URL.createObjectURL(file),
-          })
-        )
-      );
+          }),
+        ),
+      )
     },
-  });
-  const classes = useStyles();
+  })
+  const classes = useStyles()
 
   return (
     <Box className={classes.root}>
       <Grid container spacing={2}>
         <Grid item xs={12} sm={12} md={8}>
-          <Paper className={clsx(classes.paper, "paper")}>
+          <Paper className={clsx(classes.paper, 'paper')}>
             <Groups
               id={1}
-              tableHeader={"Table 1"}
-              group={"group"}
+              tableHeader={'Table 1'}
+              group={'group'}
               filter={false}
               slicers={false}
               sideSlicers={false}
+              layout={{ type: 'layout1', withoutTab: 100 }}
             />
           </Paper>
         </Grid>
@@ -134,14 +135,14 @@ export const Layout1 = () => {
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6} md={6}>
               <Paper>
-                <div className={clsx("fileUploader", classes.mar)}>
+                <div className={clsx('fileUploader', classes.mar)}>
                   <h4>Upload Files</h4>
                   <FontAwesomeIcon
                     icon={faFileExcel}
                     style={{
-                      color: "green",
-                      fontSize: "20px",
-                      paddingRight: "10px",
+                      color: 'green',
+                      fontSize: '20px',
+                      paddingRight: '10px',
                     }}
                   />
                   <div {...getRootProps({ className: classes.dropzone })}>
@@ -155,20 +156,20 @@ export const Layout1 = () => {
               </Paper>
               <Paper
                 className={clsx(classes.mar, classes.pad)}
-                style={{ display: "flex" }}
+                style={{ display: 'flex' }}
               >
                 <FontAwesomeIcon
                   icon={faFileExcel}
                   style={{
-                    color: "green",
-                    fontSize: "40px",
-                    paddingRight: "10px",
+                    color: 'green',
+                    fontSize: '40px',
+                    paddingRight: '10px',
                   }}
                 />
                 <Button
                   variant="contained"
                   size="medium"
-                  style={{ width: "100%" }}
+                  style={{ width: '100%' }}
                 >
                   Download File
                 </Button>
@@ -182,18 +183,19 @@ export const Layout1 = () => {
           </Grid>
         </Grid>
         <Grid item xs={12} sm={12} md={12}>
-          <Paper className={clsx(classes.paper, "paper")}>
+          <Paper className={clsx(classes.paper, 'paper')}>
             <Groups
               id={2}
-              tableHeader={"Table 2"}
-              group={"group"}
+              tableHeader={'Table 2'}
+              group={'group'}
               filter={false}
               slicers={false}
               sideSlicers={false}
+              layout={{ type: 'layout1', withoutTab: 100 }}
             />
           </Paper>
         </Grid>
       </Grid>
     </Box>
-  );
-};
+  )
+}
