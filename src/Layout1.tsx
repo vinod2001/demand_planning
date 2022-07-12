@@ -110,92 +110,20 @@ export const Layout1 = () => {
   const classes = useStyles()
 
   return (
-    <Box className={classes.root}>
-      <Grid container spacing={2}>
-        <Grid item xs={12} sm={12} md={8}>
-          <Paper className={clsx(classes.paper, 'paper')}>
-            <Groups
-              id={1}
-              tableHeader={'Table 1'}
-              group={'group'}
-              filter={false}
-              slicers={false}
-              sideSlicers={false}
-              layout={{ type: 'layout1', withoutTab: 100 }}
-            />
-          </Paper>
-        </Grid>
-        <Grid item xs={12} sm={12} md={4}>
-          <Paper className={classes.pad}>
-            <AutocompleteComponent />
-          </Paper>
-          <Paper className={clsx(classes.pad, classes.mar)}>
-            <AutocompleteComponent />
-          </Paper>
-          <Grid container spacing={2}>
-            <Grid item xs={12} sm={6} md={6}>
-              <Paper>
-                <div className={clsx('fileUploader', classes.mar)}>
-                  <h4>Upload Files</h4>
-                  <FontAwesomeIcon
-                    icon={faFileExcel}
-                    style={{
-                      color: 'green',
-                      fontSize: '20px',
-                      paddingRight: '10px',
-                    }}
-                  />
-                  <div {...getRootProps({ className: classes.dropzone })}>
-                    <input {...getInputProps()} />
-                    <p className="dropboxTitle">
-                      Drag File Here <br />
-                      or <span>Browse</span>
-                    </p>
-                  </div>
-                </div>
-              </Paper>
-              <Paper
-                className={clsx(classes.mar, classes.pad)}
-                style={{ display: 'flex' }}
-              >
-                <FontAwesomeIcon
-                  icon={faFileExcel}
-                  style={{
-                    color: 'green',
-                    fontSize: '40px',
-                    paddingRight: '10px',
-                  }}
-                />
-                <Button
-                  variant="contained"
-                  size="medium"
-                  style={{ width: '100%' }}
-                >
-                  Download File
-                </Button>
-              </Paper>
-            </Grid>
-            <Grid item xs={12} sm={6} md={6}>
-              <Paper className={clsx(classes.mar, classes.pad)}>
-                <ColumnPicker />
-              </Paper>
-            </Grid>
-          </Grid>
-        </Grid>
-        <Grid item xs={12} sm={12} md={12}>
-          <Paper className={clsx(classes.paper, 'paper')}>
-            <Groups
-              id={2}
-              tableHeader={'Table 2'}
-              group={'group'}
-              filter={false}
-              slicers={false}
-              sideSlicers={false}
-              layout={{ type: 'layout1', withoutTab: 100 }}
-            />
-          </Paper>
-        </Grid>
-      </Grid>
-    </Box>
-  )
-}
+    // <Box className={classes.root}>
+    //   {/* <Grid container spacing={2}>
+    //     <Grid item xs={12} sm={12} md={8}> */}
+    //   <Paper className={clsx(classes.paper, "paper")}>
+    <>
+      <Groups
+        layout={{ type: "layout1", withoutTab: 100 }}
+        id={1}
+        tableHeader={"Table 1"}
+        group={"group"}
+        filter={false}
+        slicers={false}
+        sideSlicers={false}
+      />{" "}
+    </>
+  );
+};

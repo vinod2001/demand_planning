@@ -112,7 +112,7 @@ export const DisplayDynamicHeader = ({
     } else if (layout?.type === 'layout2' && group === 'tab') {
       return '92%'
     } else if (layout?.type === 'layout1' && group !== 'tab') {
-      return '92%'
+      return '98%'
     } else {
       return '100%'
     }
@@ -151,8 +151,8 @@ export const DisplayDynamicHeader = ({
           ref={gridRef}
           // columnDefs={colDef}
           defaultColDef={defaultColDef}
-          rowModelType={'serverSide'}
-          sideBar={sideBar}
+          rowModelType={"serverSide"}
+          // sideBar={sideBar}
           // pagination={true}
           // paginationPageSize={500}
           animateRows={true}

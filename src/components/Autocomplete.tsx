@@ -30,7 +30,7 @@ type Props = {
   id?: number;
   nameSlicer?: string;
   setSlicers?: (args: any) => void;
-  setNewFilterModel?: ({}) => void;
+  setNewFilterModel?: (args: any) => void;
   newFilterModel?: {};
 };
 
@@ -136,29 +136,29 @@ export const AutocompleteComponent = ({
 }: Props) => {
   const [lists, setLists] = useState<any[]>([]);
   const handleChange = (event: React.SyntheticEvent, values: any) => {
-    if (setSlicers) {
-      // console.log(values[0]?.field, values);
-      let valueSport: string[] = [];
-      let valueYear: string[] = [];
+    // if (setSlicers) {
+    // console.log(values[0]?.field, values);
+    let valueSport: string[] = [];
+    let valueYear: string[] = [];
 
-      typeof values[0]?.field === "string"
-        ? values.map((value: any) => {
-            valueSport = [...valueSport, value.field];
-          })
-        : values.map((value: any) => {
-            valueYear = [...valueYear, value.field];
-          });
+    typeof values[0]?.field === "string"
+      ? values.map((value: any) => {
+          valueSport = [...valueSport, value.field];
+        })
+      : values.map((value: any) => {
+          valueYear = [...valueYear, value.field];
+        });
 
-      nameSlicer === "Sport"
-        ? setNewFilterModel?.({ ...newFilterModel, sport: valueSport })
-        : nameSlicer === "PostId"
-        ? setNewFilterModel?.({ ...newFilterModel, sport: valueSport })
-        : nameSlicer === "Email"
-        ? setNewFilterModel?.({ ...newFilterModel, year: valueSport })
-        : nameSlicer === "Year"
-        ? setNewFilterModel?.({ ...newFilterModel, year: valueSport })
-        : null;
-    }
+    nameSlicer === "Sport"
+      ? setNewFilterModel?.({ ...newFilterModel, sport: valueSport })
+      : nameSlicer === "PostId"
+      ? setNewFilterModel?.({ ...newFilterModel, sport: valueSport })
+      : nameSlicer === "Email"
+      ? setNewFilterModel?.({ ...newFilterModel, year: valueSport })
+      : nameSlicer === "Year"
+      ? setNewFilterModel?.({ ...newFilterModel, year: valueSport })
+      : null;
+    // }
   };
 
   useEffect(() => {
