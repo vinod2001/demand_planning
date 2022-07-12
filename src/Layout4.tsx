@@ -152,6 +152,10 @@ export const Layout4 = () => {
     slicer3: "",
   });
 
+  const [navigation, setNavigation] = React.useState({
+    content1: 'Review Plan',
+  })
+
   useEffect(() => {
     console.log(slicers);
   }, [slicers]);
@@ -183,6 +187,7 @@ export const Layout4 = () => {
               layout={{ type: "layout4", withoutTab: 100 }}
               id={2}
               setSlicers={setSlicers}
+              navigation={navigation}
             />
           </Paper>
         </Grid>

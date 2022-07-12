@@ -223,6 +223,7 @@ export const TableHeaderMenu = ({
           newFilterModel={newFilterModel}
           setNewFilterModel={setNewFilterModel}
           slicers={slicers}
+          setSlicers={setSlicers}
           sideSlicers={sideSlicers}
         />
       </Drawer>
