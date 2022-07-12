@@ -5,7 +5,7 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { filterHeader } from "../utils/utils";
+import { filterHeader, checkDomain } from "../utils/utils";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Paper from "@material-ui/core/Paper";
@@ -74,6 +74,7 @@ type Props = {
   menuType?: string;
   slicers?: boolean;
   sideSlicers?: boolean;
+  setSlicers?: (args: any) => void;
   setNewFilterModel: (arg: any) => void;
   newFilterModel: {};
 };
@@ -81,6 +82,7 @@ export const DrawerLayout = ({
   menuType,
   slicers,
   sideSlicers,
+  setSlicers,
   setNewFilterModel,
   newFilterModel,
 }: Props) => {
@@ -123,6 +125,8 @@ export const DrawerLayout = ({
       );
     },
   });
+  const { urls } = checkDomain(0);
+
   return (
     <Grid container className={classes.root}>
       <Grid item xs={12} sm={12} md={12}>
@@ -130,12 +134,24 @@ export const DrawerLayout = ({
           <>
             <Paper className={classes.pad}>
               <AutocompleteComponent
+                setSlicers={setSlicers}
+                nameSlicer={
+                  urls == "https://jsonplaceholder.typicode.com/comments?"
+                    ? "PostId"
+                    : "Sport"
+                }
                 newFilterModel={newFilterModel}
                 setNewFilterModel={setNewFilterModel}
               />
             </Paper>
             <Paper className={clsx(classes.pad, classes.mar)}>
               <AutocompleteComponent
+                setSlicers={setSlicers}
+                nameSlicer={
+                  urls == "https://jsonplaceholder.typicode.com/comments?"
+                    ? "Email"
+                    : "Year"
+                }
                 newFilterModel={newFilterModel}
                 setNewFilterModel={setNewFilterModel}
               />

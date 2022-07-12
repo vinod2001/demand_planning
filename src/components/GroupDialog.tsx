@@ -145,6 +145,7 @@ export const GroupDialog = ({
               <TabComponent
                 filter={filter}
                 id={id}
+                slicers={slicers}
                 sideSlicers={sideSlicers}
                 layout={layout}
                 onGridReady={onGridReady}

@@ -154,6 +154,7 @@ export const Layout2 = () => {
           <Paper className={clsx(classes.paper, "paper")}>
             <Groups
               id={1}
+              layout={{ type: "layout2", withoutTab: 100 }}
               tableHeader={"Table 1"}
               group={"group"}
               filter={true}
@@ -167,6 +168,7 @@ export const Layout2 = () => {
           <Paper className={clsx(classes.paper, "paper")}>
             <Groups
               id={2}
+              layout={{ type: "layout2", withoutTab: 100 }}
               tableHeader={"Table 2"}
               group={"tab"}
               filter={true}

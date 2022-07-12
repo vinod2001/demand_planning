@@ -110,21 +110,28 @@ export const Layout1 = () => {
   const classes = useStyles();
 
   return (
-    <Box className={classes.root}>
-      <Grid container spacing={2}>
-        <Grid item xs={12} sm={12} md={8}>
-          <Paper className={clsx(classes.paper, "paper")}>
-            <Groups
-              id={1}
-              tableHeader={"Table 1"}
-              group={"group"}
-              filter={false}
-              slicers={false}
-              sideSlicers={false}
-            />
-          </Paper>
-        </Grid>
-        <Grid item xs={12} sm={12} md={4}>
+    // <Box className={classes.root}>
+    //   {/* <Grid container spacing={2}>
+    //     <Grid item xs={12} sm={12} md={8}> */}
+    //   <Paper className={clsx(classes.paper, "paper")}>
+    <>
+      <Groups
+        layout={{ type: "layout1", withoutTab: 100 }}
+        id={1}
+        tableHeader={"Table 1"}
+        group={"group"}
+        filter={false}
+        slicers={false}
+        sideSlicers={false}
+      />{" "}
+    </>
+  );
+  // </Paper>
+  {
+    /* </Grid> */
+  }
+  {
+    /* <Grid item xs={12} sm={12} md={4}>
           <Paper className={classes.pad}>
             <AutocompleteComponent />
           </Paper>
@@ -184,6 +191,7 @@ export const Layout1 = () => {
         <Grid item xs={12} sm={12} md={12}>
           <Paper className={clsx(classes.paper, "paper")}>
             <Groups
+              layout={{ type: "layout1", withoutTab: 100 }}
               id={2}
               tableHeader={"Table 2"}
               group={"group"}
@@ -192,8 +200,10 @@ export const Layout1 = () => {
               sideSlicers={false}
             />
           </Paper>
-        </Grid>
-      </Grid>
-    </Box>
-  );
+        </Grid> */
+  }
+  {
+    /* </Grid> */
+  }
+  // </Box>
 };
