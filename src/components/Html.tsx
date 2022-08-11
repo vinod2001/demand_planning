@@ -23,7 +23,7 @@ import { styled } from '@mui/material/styles'
 import Tooltip, { TooltipProps, tooltipClasses } from '@mui/material/Tooltip'
 import Typography from '@mui/material/Typography'
 
-const HtmlTooltip = styled(({ className, ...props }: TooltipProps) => (
+export const HtmlTooltip = styled(({ className, ...props }: TooltipProps) => (
   <Tooltip {...props} arrow classes={{ popper: className }} />
 ))(({ theme }) => ({
   [`& .${tooltipClasses.tooltip}`]: {
