@@ -23,7 +23,7 @@ import { AutocompleteComponent } from './Autocomplete'
 import clsx from 'clsx'
 import Box from '@mui/material/Box'
 import Stack from '@mui/material/Stack'
-import { HtmlComponent } from './Html'
+import { HtmlComponent,HtmlTooltip } from './Html'
 import { TootipContent } from './ToolTipContent'
 
 const useStyles = makeStyles((theme) => ({
@@ -129,9 +129,9 @@ export const DrawerLayout = ({
   const htmlContent = [
     {
       content1:
-        '<b>Reset Plan</b> changes Submission Status back to "Not Started", Approval Status to "Pending", and clears Comments for all rows in the Plan Status table.',
+        'Reset Plan changes Submission Status back to "Not Started", Approval Status to "Pending", and clears Comments for all rows in the Plan Status table.',
       content2:
-        '<b>Approve Plan</b> changes the Annual Plan Status to "Approved" in the Plan Admin table and will change the Approval Status to "Approved" for all rows in the Plan Status table.',
+        'Approve Plan changes the Annual Plan Status to "Approved" in the Plan Admin table and will change the Approval Status to "Approved" for all rows in the Plan Status table.',
     },
   ]
   const { urls } = checkDomain(0);
@@ -171,7 +171,7 @@ export const DrawerLayout = ({
           <Grid item xs={12} sm={12} md={12}>
             {menuType !== 'main' && (
               <>
-                <Box pt={1} pb={1} style={{ display: 'flex' }}>
+                {/* <Box pt={1} pb={1} style={{ display: 'flex' }}>
                   {' '}
                   <HtmlComponent
                     toolTipContent={
@@ -183,7 +183,10 @@ export const DrawerLayout = ({
                       <TootipContent content={htmlContent[0].content2} />
                     }
                   />
-                </Box>
+                </Box> */}
+                <HtmlTooltip
+                  title={<TootipContent content={htmlContent[0].content1} />}
+                >
                 <Box pb={1}>
                   <Button
                     variant="contained"
@@ -193,6 +196,10 @@ export const DrawerLayout = ({
                     Reset Plan
                   </Button>
                 </Box>
+                </HtmlTooltip>
+                <HtmlTooltip
+                  title={<TootipContent content={htmlContent[0].content2} />}
+                >
                 <Box>
                   <Button
                     variant="contained"
@@ -202,6 +209,7 @@ export const DrawerLayout = ({
                     Approve Plan
                   </Button>
                 </Box>
+                </HtmlTooltip>
                 <Paper>
                   <div className={clsx('fileUploader', classes.mar)}>
                     <h4>Upload Files</h4>
