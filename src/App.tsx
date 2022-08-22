@@ -10,17 +10,32 @@ import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
 import { MainHeaderMenu } from './components/MainHeaderMenu'
 import MiniDrawer from './LeftAndTopNav'
+import { IntercomProvider, useIntercom } from 'react-use-intercom'
 
 export default function App() {
   const [value, setValue] = React.useState(0)
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue)
   }
+  const [unreadMessagesCount, setUnreadMessagesCount] = React.useState(0)
+  const onHide = () => console.log('Intercom did hide the Messenger')
+  const onShow = () => console.log('Intercom did show the Messenger')
+  const onUnreadCountChange = (amount: number) => {
+    console.log('Intercom has a new unread message')
+    setUnreadMessagesCount(amount)
+  }
   return (
     <>
-      <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
-        <MiniDrawer />
-        {/* <AppBar
+      <IntercomProvider
+        appId={'v8gw5slo'}
+        onHide={onHide}
+        onShow={onShow}
+        onUnreadCountChange={onUnreadCountChange}
+        autoBoot
+      >
+        <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
+          <MiniDrawer />
+          {/* <AppBar
           position="static"
           style={{
             background: '#47617e', //#47617e
@@ -48,7 +63,8 @@ export default function App() {
         {value === 1 && <Layout2 />}
         {value === 2 && <Layout3 />}
         {value === 3 && <Layout4 />} */}
-      </Box>
+        </Box>
+      </IntercomProvider>
     </>
   )
 }
