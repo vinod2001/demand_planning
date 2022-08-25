@@ -12,6 +12,7 @@ import { MainHeaderMenu } from './components/MainHeaderMenu'
 import MiniDrawer from './LeftAndTopNav'
 import { IntercomProvider, useIntercom } from 'react-use-intercom'
 
+
 export default function App() {
   const [value, setValue] = React.useState(0)
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -26,13 +27,13 @@ export default function App() {
   }
   return (
     <>
-      <IntercomProvider
+      {/* <IntercomProvider
         appId={'v8gw5slo'}
         onHide={onHide}
         onShow={onShow}
         onUnreadCountChange={onUnreadCountChange}
         autoBoot
-      >
+      > */}
         <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
           <MiniDrawer />
           {/* <AppBar
@@ -64,7 +65,7 @@ export default function App() {
         {value === 2 && <Layout3 />}
         {value === 3 && <Layout4 />} */}
         </Box>
-      </IntercomProvider>
+      {/* </IntercomProvider> */}
     </>
   )
 }
