@@ -11,7 +11,7 @@ import Tab from '@mui/material/Tab'
 import { MainHeaderMenu } from './components/MainHeaderMenu'
 import MiniDrawer from './LeftAndTopNav'
 import { IntercomProvider, useIntercom } from 'react-use-intercom'
-
+import axios from 'axios'
 
 export default function App() {
   const [value, setValue] = React.useState(0)
@@ -25,6 +25,55 @@ export default function App() {
     console.log('Intercom has a new unread message')
     setUnreadMessagesCount(amount)
   }
+
+  React.useEffect(() => {
+    // // fetch('https://api.intercom.io/export/content/data', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //     Authorization:
+    //       'Bearer dG9rOmNhZDNhZjcyXzUzMGRfNDRlNV9hYTJlXzg1ZTY3ZjFlNjM2ODoxOjA=',
+    //   },
+    //   body: JSON.stringify({
+    //     created_at_after: 1659312000,
+    //     created_at_before: 1661904000,
+    //   }),
+    // })
+    //   .then((response) => response.json())
+    //   .then((data) => console.log(`intercom:${data}`))
+    //   .catch((err) => console.log(`intercom:${err}`))
+
+    // fetch('https://api.intercom.io/export/content/data/f0avs1kbarjit3jg', {
+    //   method: 'get',
+    //   headers: {
+    //     "Content-type": "application/json",
+    //     "Authorization": "Bearer dG9rOmNhZDNhZjcyXzUzMGRfNDRlNV9hYTJlXzg1ZTY3ZjFlNjM2ODoxOjA=",
+    //     "access-control-allow-origin" : "*",
+    //   },
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     console.log('data:' + data)
+    //   })
+    //   .catch((err) => {
+    //     console.log('error:' + err)
+    //   })
+
+    axios
+      .get('https://api.intercom.io/export/content/data/f0avs1kbarjit3jg', {
+        headers: {
+          'Content-type': 'application/json',
+          'Authorization':
+            'Bearer dG9rOmNhZDNhZjcyXzUzMGRfNDRlNV9hYTJlXzg1ZTY3ZjFlNjM2ODoxOjA=',
+           "access-control-allow-origin" : "*",
+        },
+      })
+      .then((data) => console.log('data:' + data))
+      .catch(function (error) {
+        console.log(error)
+      })
+  }, [])
+
   return (
     <>
       {/* <IntercomProvider
@@ -34,9 +83,9 @@ export default function App() {
         onUnreadCountChange={onUnreadCountChange}
         autoBoot
       > */}
-        <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
-          <MiniDrawer />
-          {/* <AppBar
+      <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
+        <MiniDrawer />
+        {/* <AppBar
           position="static"
           style={{
             background: '#47617e', //#47617e
@@ -64,7 +113,7 @@ export default function App() {
         {value === 1 && <Layout2 />}
         {value === 2 && <Layout3 />}
         {value === 3 && <Layout4 />} */}
-        </Box>
+      </Box>
       {/* </IntercomProvider> */}
     </>
   )

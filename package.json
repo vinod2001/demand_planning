@@ -22,6 +22,7 @@
     "ag-grid-community": "27.3.0",
     "ag-grid-enterprise": "27.3.0",
     "ag-grid-react": "27.3.0",
+    "axios": "^0.27.2",
     "clsx": "^1.1.1",
     "intercom-react": "^1.0.0-alpha.6",
     "lodash": "^4.17.21",
@@ -29,6 +30,7 @@
     "react": "18.0.0",
     "react-dom": "18.0.0",
     "react-dropzone": "^14.2.1",
+    "react-ga": "^3.3.1",
     "react-html-parser": "^2.0.2",
     "react-scripts": "4.0.3",
     "react-use-intercom": "^2.0.0",
@@ -45,5 +47,6 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "proxy": "https://api.intercom.io/"
 }
