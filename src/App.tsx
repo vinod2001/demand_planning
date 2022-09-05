@@ -26,54 +26,6 @@ export default function App() {
     setUnreadMessagesCount(amount)
   }
 
-  React.useEffect(() => {
-    // // fetch('https://api.intercom.io/export/content/data', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     Authorization:
-    //       'Bearer dG9rOmNhZDNhZjcyXzUzMGRfNDRlNV9hYTJlXzg1ZTY3ZjFlNjM2ODoxOjA=',
-    //   },
-    //   body: JSON.stringify({
-    //     created_at_after: 1659312000,
-    //     created_at_before: 1661904000,
-    //   }),
-    // })
-    //   .then((response) => response.json())
-    //   .then((data) => console.log(`intercom:${data}`))
-    //   .catch((err) => console.log(`intercom:${err}`))
-
-    // fetch('https://api.intercom.io/export/content/data/f0avs1kbarjit3jg', {
-    //   method: 'get',
-    //   headers: {
-    //     "Content-type": "application/json",
-    //     "Authorization": "Bearer dG9rOmNhZDNhZjcyXzUzMGRfNDRlNV9hYTJlXzg1ZTY3ZjFlNjM2ODoxOjA=",
-    //     "access-control-allow-origin" : "*",
-    //   },
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     console.log('data:' + data)
-    //   })
-    //   .catch((err) => {
-    //     console.log('error:' + err)
-    //   })
-
-    axios
-      .get('https://api.intercom.io/export/content/data/f0avs1kbarjit3jg', {
-        headers: {
-          'Content-type': 'application/json',
-          'Authorization':
-            'Bearer dG9rOmNhZDNhZjcyXzUzMGRfNDRlNV9hYTJlXzg1ZTY3ZjFlNjM2ODoxOjA=',
-           "access-control-allow-origin" : "*",
-        },
-      })
-      .then((data) => console.log('data:' + data))
-      .catch(function (error) {
-        console.log(error)
-      })
-  }, [])
-
   return (
     <>
       {/* <IntercomProvider
