@@ -11,7 +11,7 @@ import Tab from '@mui/material/Tab'
 import { MainHeaderMenu } from './components/MainHeaderMenu'
 import MiniDrawer from './LeftAndTopNav'
 import { IntercomProvider, useIntercom } from 'react-use-intercom'
-
+import axios from 'axios'
 
 export default function App() {
   const [value, setValue] = React.useState(0)
@@ -25,6 +25,7 @@ export default function App() {
     console.log('Intercom has a new unread message')
     setUnreadMessagesCount(amount)
   }
+
   return (
     <>
       {/* <IntercomProvider
@@ -34,9 +35,9 @@ export default function App() {
         onUnreadCountChange={onUnreadCountChange}
         autoBoot
       > */}
-        <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
-          <MiniDrawer />
-          {/* <AppBar
+      <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
+        <MiniDrawer />
+        {/* <AppBar
           position="static"
           style={{
             background: '#47617e', //#47617e
@@ -64,7 +65,7 @@ export default function App() {
         {value === 1 && <Layout2 />}
         {value === 2 && <Layout3 />}
         {value === 3 && <Layout4 />} */}
-        </Box>
+      </Box>
       {/* </IntercomProvider> */}
     </>
   )
